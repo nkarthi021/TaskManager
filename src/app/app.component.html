@@ -1,2 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-add-task></app-add-task>
+<nav class="navbar navbar-expand navbar-light bg-light">
+    <a class="navbar-brand" routerLink="viewtask" >Task Manager</a>
+    <ul class="nav nav-bar navbar-nav nav-right">
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="addtask">Add Task</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="viewtask">View Task</a>
+        </li>
+    </ul>
+</nav>
+<router-outlet></router-outlet>
