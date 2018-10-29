@@ -1,48 +1,61 @@
-<!-- <div class="container">
-  <form class="form-inline">
-  <div class="form-group col-sm-12">
-    <label for="task" class="mr-sm-2 col-sm-3">Task</label>
-    <input type="text" class="form-control mb-2 col-sm-3" id="task" value="email@example.com">
-    <label for="parenttask" class="mr-sm-2 col-sm-3">Parent Task</label>
-    <input type="text" class="form-control mb-2 mr-sm-2 col-sm-3" id="parenttask" value="email@example.com">
-  </div>
-  
-  
-  
-</form>
-</div> -->
 <div class="container">
-<form>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="task">Task</label>
-        <input type="text" class="form-control" id="task" >
-      </div>
-      <div class="form-group col-md-6">
-        <label for="parenttask">Parent Task</label>
-        <input type="text" class="form-control" id="parenttask" >
-      </div>
-    </div>
-    <div class="form-row">
-    <div class="form-group  col-md-3">
-      <label for="priorityfrom">Priority From</label>
-      <input type="number" class="form-control" id="priorityfrom">
-    </div>
-    <div class="form-group  col-md-3">
-      <label for="priorityto">Priority To</label>
-      <input type="number" class="form-control" id="priorityto" >
-    </div>
-      <div class="form-group  col-md-3">
-        <label for="startdate">Start Date</label>
-        <input type="date" class="form-control" id="startdate">
-      </div>
-      <div class="form-group  col-md-3">
-        <label for="enddate">End Date</label>
-        <input type="date" class="form-control" id="enddate">
-      </div>
-    </div>
-  <hr>
-  
-    
-  </form>
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="task">Task</label>
+                <input type="text" class="form-control" id="task">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="parenttask">Parent Task</label>
+                <input type="text" class="form-control" id="parenttask">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group  col-md-3">
+                <label for="priorityfrom">Priority From</label>
+                <input type="number" class="form-control" id="priorityfrom">
+            </div>
+            <div class="form-group  col-md-3">
+                <label for="priorityto">Priority To</label>
+                <input type="number" class="form-control" id="priorityto">
+            </div>
+            <div class="form-group  col-md-3">
+                <label for="startdate">Start Date</label>
+                <input type="date" class="form-control" id="startdate">
+            </div>
+            <div class="form-group  col-md-3">
+                <label for="enddate">End Date</label>
+                <input type="date" class="form-control" id="enddate">
+            </div>
+        </div>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Parent Task</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Task1</td>
+                    <td>Parent Task 1</td>
+                    <td>15</td>
+                    <td>12/08/2018</td>
+                    <td>29/10/2018</td>
+                    <td>
+                        <a routerLink="/updatetask" class="btn btn-primary">Edit Task</a>
+                        <input type="button" class="btn btn-primary end-task"  value="End Task">
+                        <router-outlet></router-outlet>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </form>
 </div>
