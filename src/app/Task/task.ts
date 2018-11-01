@@ -1,11 +1,13 @@
 export interface ITask {
-    TaskId:number;
-    Task:string;
-    ParentTaskId:number;
-    StartDate:string;
-    EndDate:string;
+    Task_Id:number;
+    Task1:string;
+    Parent_Id:number;
+    Start_Date:string;
+    End_Date:string;
     Priority:number;
 }
+
+
 
 export interface ITaskFilter {
     Task:string;

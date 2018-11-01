@@ -1,5 +1,5 @@
 <div class="container">
-    <form>
+      <form>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="task">Task</label>
@@ -40,13 +40,13 @@
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody  *ngFor="let task of taskDetails">
                 <tr>
-                    <td>Task1</td>
-                    <td>Parent Task 1</td>
-                    <td>15</td>
-                    <td>12/08/2018</td>
-                    <td>29/10/2018</td>
+                    <td>{{task.Task}}</td>
+                    <td>{{task.ParentTask}}</td>
+                    <td>{{task.Priority}}</td>
+                    <td>{{task.StartDate | date:'dd/MM/yyyy'}}</td>
+                    <td>{{task.EndDate | date:'dd/MM/yyyy'}}</td>
                     <td>
                         <a routerLink="/updatetask" class="btn btn-primary">Edit Task</a>
                         <input type="button" class="btn btn-primary end-task"  value="End Task">
