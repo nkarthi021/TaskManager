@@ -1,4 +1,4 @@
-export interface ITask {
+export class Task {
     Task_Id:number;
     Task1:string;
     Parent_Id:number;
@@ -7,9 +7,7 @@ export interface ITask {
     Priority:number;
 }
 
-
-
-export interface ITaskFilter {
+export class TaskFilter {
     Task:string;
     ParentTask:string;
     PriorityFrom:number;

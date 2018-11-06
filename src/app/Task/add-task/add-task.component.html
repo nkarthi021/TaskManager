@@ -1,9 +1,9 @@
 <div class="container">
-  <form class="form-horizontal" role="form">
+  <form #taskForm="ngForm" class="form-horizontal" role="form">
     <h2>Add Task</h2>
     <hr>
     <p>{{task | json}}</p>
-    <div class="form-group">
+      <div class="form-group">
       <label for="task" class="col-sm-3 control-label">Task</label>
       <div class="col-sm-9">
         <input type="text" [(ngModel)]="task.Task1" name="task" class="form-control" autofocus>
@@ -42,7 +42,7 @@
     <!-- /.form-group -->
     <div class="form-group">
       <div class="col-sm-9 col-sm-offset-3">
-        <button type="submit" (click)="AddTask()" class="btn btn-primary">Add Task</button>
+        <button type="submit" (click)="AddTask(taskForm)" class="btn btn-primary">Add Task</button>
       </div>
     </div>
 

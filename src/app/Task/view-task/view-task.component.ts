@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { SharedService } from '../../Service/SharedService'
-import { ITask } from '../task';
+import { Task, TaskFilter } from '../task';
+
 
 
 @Component({
@@ -11,9 +12,12 @@ import { ITask } from '../task';
 })
 export class ViewTaskComponent implements OnInit {
   taskDetails:any[];
+  taskFilter:TaskFilter = {Task:null, ParentTask:null, PriorityFrom:null, PriorityTo:null, StartDate:null, EndDate:null};
   constructor(private _sharedService:SharedService) { }
  
   ngOnInit() {
+  
+    
     this._sharedService.GetTaskDetails().subscribe(values => {this.taskDetails =values});
     
    
