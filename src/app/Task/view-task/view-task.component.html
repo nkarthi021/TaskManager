@@ -1,7 +1,7 @@
 <div class="container">
     <form role="form">
         <div class="card">
-            <div class="card-header bg-primary text-white">View Task</div>
+            <div class="card-header bg-success text-white">View Task</div>
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -51,8 +51,8 @@
                             <td>{{task.StartDate | date:'dd/MM/yyyy'}}</td>
                             <td>{{task.EndDate | date:'dd/MM/yyyy'}}</td>
                             <td>
-                                <a [routerLink]="['/updatetask',task.TaskId]" class="btn btn-primary">Edit Task</a>
-                                <input type="button" class="btn btn-primary end-task" value="End Task">
+                                <a [routerLink]="['/updatetask',task.TaskId]" class="btn btn-info">Edit Task</a>
+                                <input type="button" class="btn btn-info end-task" value="End Task">
                                 <router-outlet></router-outlet>
                             </td>
                         </tr>

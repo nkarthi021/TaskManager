@@ -9,22 +9,22 @@ export class SharedService {
 
     GetTaskDetails(){
        
-        return this._Http.get<any[]>("http://localhost:59408/api/TaskAPI/GetTasks");
+        return this._Http.get<any[]>("http://localhost:50082/api/TaskAPI/GetTasks");
     }
 
     GetTaskDetailsByTaskId(TaskId:number){
        
-        return this._Http.get<any>("http://localhost:59408/api/TaskAPI/GetTask?TaskId="+ TaskId);
+        return this._Http.get<any>("http://localhost:50082/api/TaskAPI/GetTask?TaskId="+ TaskId);
     }
 
     GetParentTask(taskId:number) {
-        return this._Http.get<any[]>("http://localhost:59408/api/TaskAPI/GetParentTask?TaskId="+ taskId +"");
+        return this._Http.get<any[]>("http://localhost:50082/api/TaskAPI/GetParentTask?TaskId="+ taskId +"");
         
     }
 
     AddTaskDetails(task:Task) {
         
-       return this._Http.post("http://localhost:59408/api/TaskAPI/Create",task, {
+       return this._Http.post("http://localhost:50082/api/TaskAPI/Create",task, {
         headers: new HttpHeaders({
             'Access-Control-Allow-Origin':'*',
             'Access-Control-Allow-Headers':'Content-Type',
@@ -35,7 +35,7 @@ export class SharedService {
 
     UpdateTaskDetails(task:Task) {
         
-        return this._Http.post("http://localhost:59408/api/TaskAPI/Update",task, {
+        return this._Http.post("http://localhost:50082/api/TaskAPI/Update",task, {
          headers: new HttpHeaders({
              'Access-Control-Allow-Origin':'*',
              'Access-Control-Allow-Headers':'Content-Type',
