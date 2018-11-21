@@ -1,41 +1,49 @@
 <div class="container">
-  <form #taskForm="ngForm" class="form-horizontal" role="form">
+    <form #addtaskFrom="ngForm" novalidate class="form-horizontal"  role="form">
     <div class="card">
       <div class="card-header bg-success text-white">Add Task</div>
       <div class="card-body">
         <div class="form-group">
           <label for="task" class="col-sm-3 control-label">Task</label>
           <div class="col-sm-9">
-            <input type="text" [(ngModel)]="task.Task1" name="task" class="form-control" autofocus>
+            <input type="text" required [(ngModel)]="task.Task1" name="task" #taskcontrol="ngModel" class="form-control"
+            [class.is-invalid]="taskcontrol.invalid && taskcontrol.touched" [class.is-valid]="taskcontrol.valid" >
+            <span class="invalid-tooltip" *ngIf="taskcontrol.invalid && taskcontrol.touched">Task is required</span>
           </div>
         </div>
         <div class="form-group">
           <label for="Priority" class="col-sm-3 control-label">Priority</label>
           <div class="col-sm-9">
-            <input type="range" [(ngModel)]="task.Priority" name="priority" min="1" max="30" step="1" class="form-control" autofocus>
-
+            <input type="range" required [(ngModel)]="task.Priority" name="priority" #prioritycontrol="ngModel" min="1" max="30" step="1" class="custom-range"
+            [class.is-invalid]="prioritycontrol.invalid && prioritycontrol.touched" [class.is-valid]="prioritycontrol.valid">
+            <span class="invalid-feedback" *ngIf="prioritycontrol.invalid && prioritycontrol.touched">Priority is required</span>
           </div>
         </div>
         <div class="form-group">
-          <label for="email" class="col-sm-3 control-label">Parent Task </label>
+          <label  class="col-sm-3 control-label">Parent Task </label>
           <div class="col-sm-9">
             <select [(ngModel)]="task.Parent_Id" name="parentid" class="form-control">
-          <ng-container *ngFor="let parenttask of parenttasks">
-          <option [value]="parenttask.TaskId" >{{parenttask.Task}}</option>
-        </ng-container>
-        </select>
+              <ng-container *ngFor="let parenttask of parenttasks">
+                <option [value]="parenttask.TaskId">{{parenttask.Task}}</option>
+              </ng-container>
+            </select>
+
           </div>
         </div>
         <div class="form-group">
           <label for="startdate" class="col-sm-3 control-label">Start Date</label>
           <div class="col-sm-9">
-            <input type="date" [(ngModel)]="task.Start_Date" name="startdate" class="form-control">
+            <input type="text" required readonly [(ngModel)]="task.Start_Date" #startdatecontrol="ngModel" name="startdate"  bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"
+            [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched" [class.is-valid]="startdatecontrol.valid"  placement="right" class="form-control">
+            <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date is required</span>
           </div>
         </div>
         <div class="form-group">
           <label for="enddate" class="col-sm-3 control-label">End Date</label>
           <div class="col-sm-9">
-            <input type="date" [(ngModel)]="task.End_Date" name="enddate" class="form-control">
+            <input type="text" required readonly [(ngModel)]="task.End_Date" #enddatecontrol="ngModel" name="enddate"  bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"
+            [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched" [class.is-valid]="enddatecontrol.valid"  placement="right" class="form-control">
+            <span class="invalid-tooltip" *ngIf="enddatecontrol.invalid && enddatecontrol.touched">End Date is required</span>
           </div>
         </div>
       </div>
@@ -43,7 +51,8 @@
         <!-- /.form-group -->
         <div class="form-group">
           <div class="col-sm-9 col-sm-offset-3">
-            <button type="submit" (click)="AddTask(taskForm)" class="btn btn-info">Add Task</button>
+            <button type="submit" (click)="AddTask(addtaskFrom)" [disabled]="addtaskFrom.invalid" class="btn btn-info">Add Task</button>
+            <button type="reset" id="reset" class="btn btn-info ml-1">Reset</button>
           </div>
         </div>
       </div>

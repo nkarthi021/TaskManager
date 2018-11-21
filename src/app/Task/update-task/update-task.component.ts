@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../Service/SharedService';
 import { NgForm } from '@angular/forms';
 import { Task } from '../task';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
@@ -12,10 +12,10 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
   providers:[SharedService]
 })
 export class UpdateTaskComponent implements OnInit {
- task:Task = { Task1:null, Parent_Id:0, Task_Id:0, Priority:null, Start_Date:null, End_Date:null } ;
+ task:Task = { Task1:null, Parent_Id:0, Task_Id:0, Priority:null, Start_Date:null, End_Date:null, EditFlag:true } ;
   parenttasks:any[];
   Status:any;
-  constructor(private _sharedService:SharedService, private _activateRoute :ActivatedRoute) {
+  constructor(private _sharedService:SharedService, private _activateRoute :ActivatedRoute,private _router:Router) {
 
    }
 
@@ -31,9 +31,9 @@ export class UpdateTaskComponent implements OnInit {
   }
 
   UpdateTask(updatetaskForm:NgForm){
-    this._sharedService.UpdateTaskDetails(this.task).subscribe(value => { this.Status = value  });
-    updatetaskForm.reset();
-    console.log(this.Status);
+    this._sharedService.UpdateTaskDetails(this.task).subscribe(value => { this.Status = value; this._router.navigate(["/viewtask"]);  });
+  //  updatetaskForm.reset();
+    
   }
 
 }

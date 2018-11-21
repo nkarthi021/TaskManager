@@ -5,6 +5,7 @@ export class Task {
     Start_Date:string;
     End_Date:string;
     Priority:number;
+    EditFlag:boolean;
 }
 
 export class TaskFilter {

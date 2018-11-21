@@ -24,11 +24,14 @@
                     </div>
                     <div class="form-group  col-md-3">
                         <label for="startdate">Start Date</label>
-                        <input type="date" [(ngModel)]="taskFilter.StartDate" name="StartDate" class="form-control" id="startdate">
+                        <input type="text" [(ngModel)]="taskFilter.StartDate" [(bsValue)]="taskFilter.StartDate" value="{{taskFilter.StartDate | date:'dd/MM/yyyy'}}"
+                            bsDatepicker placement="right" name="StartDate" class="form-control" id="startdate">
                     </div>
                     <div class="form-group  col-md-3">
                         <label for="enddate">End Date</label>
-                        <input type="date" [(ngModel)]="taskFilter.EndDate" name="EndDate" class="form-control" id="enddate">
+                        <input type="text" [(ngModel)]="taskFilter.EndDate" [(bsValue)]="taskFilter.EndDate" value="{{taskFilter.EndDate | date:'dd/MM/yyyy'}}"
+                            bsDatepicker placement="right" name="EndDate" class="form-control" id="EndDate">
+                        <!-- <input type="date" [(ngModel)]="taskFilter.EndDate" name="EndDate" class="form-control" id="enddate"> -->
                     </div>
                 </div>
                 <hr>
@@ -51,9 +54,15 @@
                             <td>{{task.StartDate | date:'dd/MM/yyyy'}}</td>
                             <td>{{task.EndDate | date:'dd/MM/yyyy'}}</td>
                             <td>
-                                <a [routerLink]="['/updatetask',task.TaskId]" class="btn btn-info">Edit Task</a>
-                                <input type="button" class="btn btn-info end-task" value="End Task">
-                                <router-outlet></router-outlet>
+                                <div class="btn-toolbar" role="toolbar">
+                                    <div class="btn-group mr-2" role="group">
+                                       <input type="button" [disabled]="!task.EditFlag" (click)="UpdateTask(task.TaskId)" class="btn btn-info" value="Edit Task">
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <input type="button" *ngIf="task.EditFlag" (click)="UpdateEditFlag(task.TaskId)" class="btn btn-info" value="End Task">
+                                        <router-outlet></router-outlet>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
 

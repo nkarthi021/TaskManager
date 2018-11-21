@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Task, TaskFilter } from '../Task/task'
+import { formatDate } from '@angular/common';
 //import 'rxjs/Operator/filter';
 
 
@@ -7,7 +8,8 @@ import { Task, TaskFilter } from '../Task/task'
     name:'viewtaskfilter'
 })
 export class ViewTaskFilterPipe implements PipeTransform  {
-    transform(tasks:any, taskfilter:any ): any {
+      
+       transform(tasks:any, taskfilter:any ): any {
         
     //     console.log('Filter');
     //     if(!tasks){
@@ -45,10 +47,11 @@ export class ViewTaskFilterPipe implements PipeTransform  {
             tasks = tasks.filter(obj => obj['Priority']<=taskfilter.PriorityTo);  
         }
         if(taskfilter.StartDate){
-            tasks = tasks.filter(obj => obj['StartDate'].includes(taskfilter.StartDate));
+            
+            tasks = tasks.filter(obj => obj['StartDate'].includes(formatDate(taskfilter.StartDate,"yyyy-MM-dd","en-US")));
         }
         if(taskfilter.EndDate){
-            tasks = tasks.filter(obj => obj['EndDate'].includes(taskfilter.EndDate));
+            tasks = tasks.filter(obj => obj['EndDate'].includes(formatDate(taskfilter.EndDate,"yyyy-MM-dd","en-US")));
         }
         return tasks;
     }
