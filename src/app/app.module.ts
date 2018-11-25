@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AddTaskComponent } from './Task/add-task/add-task.component';
 import { ViewTaskComponent } from './Task/view-task/view-task.component';
 import { UpdateTaskComponent } from './Task/update-task/update-task.component';
-import { ViewTaskFilterPipe } from './Filter/viewtaskfilter.pipe'
+import { ViewTaskFilterPipe } from './Filter/view-task-filter.pipe'
 
 const AppRoute : Routes = [
   {path:'addtask', component:AddTaskComponent },

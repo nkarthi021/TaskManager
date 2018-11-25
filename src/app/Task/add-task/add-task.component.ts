@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task  } from '../task';
 import { NgForm } from '@angular/forms'
 import { Router } from '@angular/router'
-import { SharedService } from '../../Service/SharedService'
+import { SharedService } from '../../Service/shared-service'
 
 @Component({
   selector: 'app-add-task',

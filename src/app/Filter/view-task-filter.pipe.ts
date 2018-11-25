@@ -8,7 +8,7 @@ import { formatDate } from '@angular/common';
     name:'viewtaskfilter'
 })
 export class ViewTaskFilterPipe implements PipeTransform  {
-      
+       
        transform(tasks:any, taskfilter:any ): any {
         
     //     console.log('Filter');

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../../Service/SharedService';
+import { SharedService } from '../../Service/shared-service';
 import { NgForm } from '@angular/forms';
 import { Task } from '../task';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,8 +21,11 @@ export class UpdateTaskComponent implements OnInit {
 
   ngOnInit() {
     let TaskId = this._activateRoute.snapshot.params['TaskId'];
+    if(TaskId != undefined)
+    {
     this.LoadParentTask(TaskId);
     this._sharedService.GetTaskDetailsByTaskId(TaskId).subscribe(values => {this.task =values});
+    }
     
   }
 
