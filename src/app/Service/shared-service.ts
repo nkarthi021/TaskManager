@@ -47,9 +47,9 @@ export class SharedService {
             'Access-Control-Allow-Headers':'Content-Type',
             'Access-Control-Allow-Methods':'GET, POST, PUT, DELETE, OPTIONS'
          })
-        }).pipe(tap(_ => console.log('Added Task TaskId:${task.Task_Id}')),
-            catchError(this.handleError('Added Task')));
-        
+        });
+        // .pipe(tap(_ => console.log('Added Task TaskId:${task.Task_Id}')),
+        //     catchError(this.handleError('Added Task')))
     }
 
     UpdateTaskDetails(task:Task) {
@@ -64,8 +64,8 @@ export class SharedService {
      }
 
      UpdateEditFlag(TaskId:number, EditFlag:boolean) {
-        this.UPDATE_EDIT_FLAG_URL=this.UPDATE_EDIT_FLAG_URL+TaskId+"&EditFlag="+EditFlag
-        return this._Http.post(this.UPDATE_EDIT_FLAG_URL, {
+       
+        return this._Http.post(this.UPDATE_EDIT_FLAG_URL+TaskId+"&EditFlag="+EditFlag, {
          headers: new HttpHeaders({
              'Access-Control-Allow-Origin':'*',
              'Access-Control-Allow-Headers':'Content-Type',
