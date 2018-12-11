@@ -1,10 +1,12 @@
-<div class="container">
+<div class="container-fluid">
+   <div class="form-row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
     <form #addprojectForm="ngForm" novalidate class="form-horizontal"  role="form">
     <div class="card">
       <div class="card-header bg-success text-white">Add Project</div>
       <div class="card-body">
          <div class="form-group">
-          <label for="task" class="col-sm-3 control-label">Name</label>
+          <label for="task" class="col-sm-5 control-label">Name</label>
           <div class="col-sm-9">
             <input type="text" required [(ngModel)]="project.Name" name="task" #namecontrol="ngModel" class="form-control"
             [class.is-invalid]="namecontrol.invalid && namecontrol.touched" [class.is-valid]="namecontrol.valid" >
@@ -12,7 +14,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="Priority" class="col-sm-3 control-label">Priority</label>
+          <label for="Priority" class="col-sm-5 control-label">Priority</label>
           <div class="col-sm-9">
             <input type="range" required [(ngModel)]="project.Priority" name="priority" #prioritycontrol="ngModel" min="1" max="30" step="1" class="custom-range"
             [class.is-invalid]="prioritycontrol.invalid && prioritycontrol.touched" [class.is-valid]="prioritycontrol.valid">
@@ -20,7 +22,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label  class="col-sm-3 control-label">Manager </label>
+          <label  class="col-sm-5 control-label">Manager </label>
           <div class="col-sm-9">
             <select [(ngModel)]="project.Manager_Id" name="managerid" class="form-control">
               <ng-container *ngFor="let Manager of Managers">
@@ -31,7 +33,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="startdate" class="col-sm-3 control-label">Start Date</label>
+          <label for="startdate" class="col-sm-5 control-label">Start Date</label>
           <div class="col-sm-9">
             <input type="text" required readonly [(ngModel)]="project.Start_Date" #startdatecontrol="ngModel" name="startdate"  bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"
             [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched" [class.is-valid]="startdatecontrol.valid"  placement="right" class="form-control">
@@ -39,7 +41,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="enddate" class="col-sm-3 control-label">End Date</label>
+          <label for="enddate" class="col-sm-5 control-label">End Date</label>
           <div class="col-sm-9">
             <input type="text" required readonly [(ngModel)]="project.End_Date" #enddatecontrol="ngModel" name="enddate"  bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"
             [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched" [class.is-valid]="enddatecontrol.valid"  placement="right" class="form-control">
@@ -60,5 +62,44 @@
     </div>
   </form>
   <!-- /form -->
+  </div>
+    <div class="col-lg-7 col-md-7 col-sm-12">
+      <table class="table table-bordered table-stripped">
+        <thead class="bg-success text-white">
+          <tr>
+            <th scope="col">Project Name</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Manager</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let project of projectDetails" >
+                        <tr>
+                            <td>{{project.Name}}</td>
+                            <td>{{project.Priority}}</td>
+                            <td>{{project.StartDate}}</td>
+                            <td>{{project.EndDate}}</td>
+                            <td>{{project.Manager}}</td>
+                            <td>
+                                <div class=" btn-toolbar " role="toolbar ">
+                                    <div class="btn-group mr-2 " role="group ">
+                                       <input type="button " (click)="Edit(project.ProjectId)
+          " class="btn btn-info " value="Edit">
+                                    </div>
+                                    <div class="btn-group " role="group ">
+                                        <input type="button " (click)="Delete(project.ProjectId)
+          " class="btn btn-info " value="Delete ">
+                                        <router-outlet></router-outlet>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+</table>
+  </div>
+  </div>
 </div>
 <!-- ./container -->

@@ -20,7 +20,7 @@ export class AddUserComponent implements OnInit {
 
   }
 
-  AddUser(adduserForm: NgForm){
+  Add(adduserForm: NgForm){
     this._sharedService.AddUser(this.user).subscribe((value) => this.status= value);
     adduserForm.reset();
   }
