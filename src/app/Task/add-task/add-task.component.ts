@@ -13,7 +13,7 @@ import { SharedService } from '../../Service/shared-service'
  
 })
 export class AddTaskComponent implements OnInit {
-  task:Task = { Task1:"", Parent_Id:0, Task_Id:0, Priority:1, Start_Date:null, End_Date:null, EditFlag:true } ;
+  task:Task = { Name:"", Parent_Id:0, Task_Id:0, Priority:1, Start_Date:null, End_Date:null, Edit_Flag:true, User_Id:2, Project_Id:1 } ;
   parenttasks:any[];
   Status:any;
 
@@ -26,9 +26,9 @@ export class AddTaskComponent implements OnInit {
 
   AddTask(taskForm: NgForm) {
     console.log('calling AddTask');
-    this._sharedService.AddTaskDetails(this.task).subscribe(values => {this.Status = values; this._router.navigate(["/viewtask"]);});
+    this._sharedService.AddTaskDetails(this.task).subscribe(values => {this.Status = values; console.log(this.Status); this._router.navigate(["/viewtask"]);});
     // taskForm.reset();
-    // this.task ={Task1:null, Parent_Id:0, Task_Id:0, Priority:1, Start_Date:null, End_Date:null, EditFlag:true};
+   
     
     // this.LoadParentTask();
 

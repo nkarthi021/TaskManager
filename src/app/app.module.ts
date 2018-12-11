@@ -12,14 +12,14 @@ import { ViewTaskComponent } from './Task/view-task/view-task.component';
 import { UpdateTaskComponent } from './Task/update-task/update-task.component';
 import { ViewTaskFilterPipe } from './Filter/view-task-filter.pipe';
 import { AddUserComponent } from './User/add-user/add-user.component';
-import { UpdateUserComponent } from './User/update-user/update-user.component';
 import { AddProjectComponent } from './Project/add-project/add-project.component';
-import { UpdateProjectComponent } from './Project/update-project/update-project.component'
 
 const AppRoute : Routes = [
   {path:'addtask', component:AddTaskComponent },
   {path:'updatetask/:TaskId', component:UpdateTaskComponent},
   {path:'viewtask', component:ViewTaskComponent},
+  {path:'adduser', component:AddUserComponent},
+  {path:'addproject', component:AddProjectComponent},
   {path:'', component:ViewTaskComponent}
 ]
 
@@ -31,11 +31,8 @@ const AppRoute : Routes = [
     UpdateTaskComponent,
     ViewTaskFilterPipe,
     AddUserComponent,
-    UpdateUserComponent,
-    AddProjectComponent,
-    UpdateProjectComponent
-    
-  ],
+    AddProjectComponent
+     ],
   imports: [
     BrowserModule,
     AppRoutingModule, HttpClientModule, BsDatepickerModule.forRoot(), RouterModule.forRoot(AppRoute), FormsModule

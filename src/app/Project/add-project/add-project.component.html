@@ -1,3 +1,64 @@
-<p>
-  add-project works!
-</p>
+<div class="container">
+    <form #addprojectForm="ngForm" novalidate class="form-horizontal"  role="form">
+    <div class="card">
+      <div class="card-header bg-success text-white">Add Project</div>
+      <div class="card-body">
+         <div class="form-group">
+          <label for="task" class="col-sm-3 control-label">Name</label>
+          <div class="col-sm-9">
+            <input type="text" required [(ngModel)]="project.Name" name="task" #namecontrol="ngModel" class="form-control"
+            [class.is-invalid]="namecontrol.invalid && namecontrol.touched" [class.is-valid]="namecontrol.valid" >
+            <span class="invalid-tooltip" *ngIf="namecontrol.invalid && namecontrol.touched">Task is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Priority" class="col-sm-3 control-label">Priority</label>
+          <div class="col-sm-9">
+            <input type="range" required [(ngModel)]="project.Priority" name="priority" #prioritycontrol="ngModel" min="1" max="30" step="1" class="custom-range"
+            [class.is-invalid]="prioritycontrol.invalid && prioritycontrol.touched" [class.is-valid]="prioritycontrol.valid">
+            <span class="invalid-feedback" *ngIf="prioritycontrol.invalid && prioritycontrol.touched">Priority is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-sm-3 control-label">Manager </label>
+          <div class="col-sm-9">
+            <select [(ngModel)]="project.Manager_Id" name="managerid" class="form-control">
+              <ng-container *ngFor="let Manager of Managers">
+                <option [value]="Manager.UserId">{{Manager.UserName}}</option>
+              </ng-container>
+            </select>
+
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="startdate" class="col-sm-3 control-label">Start Date</label>
+          <div class="col-sm-9">
+            <input type="text" required readonly [(ngModel)]="project.Start_Date" #startdatecontrol="ngModel" name="startdate"  bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"
+            [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched" [class.is-valid]="startdatecontrol.valid"  placement="right" class="form-control">
+            <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date is required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="enddate" class="col-sm-3 control-label">End Date</label>
+          <div class="col-sm-9">
+            <input type="text" required readonly [(ngModel)]="project.End_Date" #enddatecontrol="ngModel" name="enddate"  bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"
+            [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched" [class.is-valid]="enddatecontrol.valid"  placement="right" class="form-control">
+            <span class="invalid-tooltip" *ngIf="enddatecontrol.invalid && enddatecontrol.touched">End Date is required</span>
+          </div>
+        </div>
+        
+      </div>
+      <div class="card-footer">
+        <!-- /.form-group -->
+        <div class="form-group">
+          <div class="col-sm-9 col-sm-offset-3">
+            <button type="submit" (click)="AddProject(addprojectForm)" [disabled]="addprojectForm.invalid" class="btn btn-info">Add Project</button>
+            <button type="reset" id="reset" class="btn btn-info ml-1">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- /form -->
+</div>
+<!-- ./container -->

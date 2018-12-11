@@ -1,9 +1,6 @@
 export class User {
-    Task_Id:number;
-    Name:string;
-    Parent_Id:number;
-    Start_Date:string;
-    End_Date:string;
-    Priority:number;
-    EditFlag:boolean;
+    User_Id:number;
+    First_Name:string;
+    Last_Name:string;
+    Manager_Flag:boolean;
 }

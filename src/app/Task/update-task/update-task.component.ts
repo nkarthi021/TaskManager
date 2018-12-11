@@ -12,7 +12,7 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
   providers:[SharedService]
 })
 export class UpdateTaskComponent implements OnInit {
- task:Task = { Task1:null, Parent_Id:0, Task_Id:0, Priority:null, Start_Date:null, End_Date:null, EditFlag:true } ;
+ task:Task = { Name:null, Parent_Id:0, Task_Id:0, Priority:null, Start_Date:null, End_Date:null, Edit_Flag:true, User_Id:2, Project_Id:1  } ;
   parenttasks:any[];
   Status:any;
   constructor(private _sharedService:SharedService, private _activateRoute :ActivatedRoute,private _router:Router) {

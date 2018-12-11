@@ -5,7 +5,9 @@ export class Task {
     Start_Date:string;
     End_Date:string;
     Priority:number;
-    EditFlag:boolean;
+    Edit_Flag:boolean;
+    User_Id:number;
+    Project_Id:number;
 }
 
 export class TaskFilter {
