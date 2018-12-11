@@ -1,6 +1,6 @@
 export class Task {
     Task_Id:number;
-    Task1:string;
+    Name:string;
     Parent_Id:number;
     Start_Date:string;
     End_Date:string;

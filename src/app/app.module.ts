@@ -10,7 +10,11 @@ import { AppComponent } from './app.component';
 import { AddTaskComponent } from './Task/add-task/add-task.component';
 import { ViewTaskComponent } from './Task/view-task/view-task.component';
 import { UpdateTaskComponent } from './Task/update-task/update-task.component';
-import { ViewTaskFilterPipe } from './Filter/view-task-filter.pipe'
+import { ViewTaskFilterPipe } from './Filter/view-task-filter.pipe';
+import { AddUserComponent } from './User/add-user/add-user.component';
+import { UpdateUserComponent } from './User/update-user/update-user.component';
+import { AddProjectComponent } from './Project/add-project/add-project.component';
+import { UpdateProjectComponent } from './Project/update-project/update-project.component'
 
 const AppRoute : Routes = [
   {path:'addtask', component:AddTaskComponent },
@@ -25,7 +29,11 @@ const AppRoute : Routes = [
     AddTaskComponent,
     ViewTaskComponent,
     UpdateTaskComponent,
-    ViewTaskFilterPipe
+    ViewTaskFilterPipe,
+    AddUserComponent,
+    UpdateUserComponent,
+    AddProjectComponent,
+    UpdateProjectComponent
     
   ],
   imports: [
