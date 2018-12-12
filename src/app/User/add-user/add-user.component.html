@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid mt-5">
   <div class="form-row">
     <div class="col-lg-4 col-md-4 col-sm-12">
       <form #addUserForm="ngForm" novalidate class="form-horizontal" role="form">
@@ -8,17 +8,21 @@
             <div class="form-group">
               <label for="task" class="col-sm-5 control-label">First Name</label>
               <div class="col-sm-9">
-                <input type="text" required [(ngModel)]="user.First_Name" name="FirstName" #firstnamecontrol="ngModel" class="form-control"
-                  [class.is-invalid]="firstnamecontrol.invalid && firstnamecontrol.touched" [class.is-valid]="firstnamecontrol.valid">
-                <span class="invalid-tooltip" *ngIf="firstnamecontrol.invalid && firstnamecontrol.touched">First Name is required</span>
+                <input type="text" required [(ngModel)]="user.First_Name" name="FirstName" #firstnamecontrol="ngModel"
+                  class="form-control" [class.is-invalid]="firstnamecontrol.invalid && firstnamecontrol.touched"
+                  [class.is-valid]="firstnamecontrol.valid">
+                <span class="invalid-tooltip" *ngIf="firstnamecontrol.invalid && firstnamecontrol.touched">First Name
+                  is required</span>
               </div>
             </div>
             <div class="form-group">
               <label for="task" class="col-sm-5 control-label">Last Name</label>
               <div class="col-sm-9">
-                <input type="text" required [(ngModel)]="user.Last_Name" name="LastName" #lastnamecontrol="ngModel" class="form-control"
-                  [class.is-invalid]="lastnamecontrol.invalid && lastnamecontrol.touched" [class.is-valid]="lastnamecontrol.valid">
-                <span class="invalid-tooltip" *ngIf="lastnamecontrol.invalid && lastnamecontrol.touched">Last Name is required</span>
+                <input type="text" required [(ngModel)]="user.Last_Name" name="LastName" #lastnamecontrol="ngModel"
+                  class="form-control" [class.is-invalid]="lastnamecontrol.invalid && lastnamecontrol.touched"
+                  [class.is-valid]="lastnamecontrol.valid">
+                <span class="invalid-tooltip" *ngIf="lastnamecontrol.invalid && lastnamecontrol.touched">Last Name is
+                  required</span>
               </div>
             </div>
             <div class="form-check">
@@ -32,7 +36,8 @@
             <!-- /.form-group -->
             <div class="form-group">
               <div class="col-sm-9 col-sm-offset-3">
-                <button type="submit" (click)="Add(addUserForm)" [disabled]="addUserForm.invalid" class="btn btn-info">Add User</button>
+                <button type="submit" (click)="Add(addUserForm)" [disabled]="addUserForm.invalid" class="btn btn-info">Add
+                  User</button>
                 <button type="reset" id="reset" class="btn btn-info ml-1">Reset</button>
               </div>
             </div>
@@ -50,29 +55,27 @@
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody *ngFor="let user of userDetails" >
-                        <tr>
-                            <td>{{user.FirstName}}</td>
-                            <td>{{user.LastName}}</td>
-                            <td>{{user.Manager}}</td>
-                            <td>
-                                <div class=" btn-toolbar " role="toolbar ">
-                                    <div class="btn-group mr-2 " role="group ">
-                                       <input type="button " (click)="Edit(user.UserId)
-          " class="btn btn-info " value="Edit">
-                                    </div>
-                                    <div class="btn-group " role="group ">
-                                        <input type="button " *ngIf="task.EditFlag " (click)="Delete(user.UserId)
-          " class="btn btn-info " value="Delete ">
-                                        <router-outlet></router-outlet>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+        <tbody *ngFor="let user of userDetails">
+          <tr>
+            <td>{{user.FirstName}}</td>
+            <td>{{user.LastName}}</td>
+            <td>{{user.Manager}}</td>
+            <td>
+              <div class=" btn-toolbar" role="toolbar">
+                <div class="btn-group" role="group">
+                  <input type="button" (click)="Edit(user.UserId)" class="btn btn-info" value="Edit">
+                </div>
+                <div class="btn-group ml-2" role="group">
+                  <input type="button" (click)="Delete(user.UserId)" class="btn btn-info" value="Delete ">
+                  <router-outlet></router-outlet>
+                </div>
+              </div>
+            </td>
+          </tr>
 
-                    </tbody>
-</table>
-  </div>
+        </tbody>
+      </table>
+    </div>
   </div>
   <!-- /form -->
 </div>

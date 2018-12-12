@@ -36,8 +36,7 @@
             <input type="text" required readonly [(ngModel)]="task.Start_Date" [(bsValue)]="task.Start_Date" value="{{task.Start_Date | date:'dd/MM/yyyy'}}"
               #startdatecontrol="ngModel" name="startdate" bsDatepicker [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched"
               [class.is-valid]="startdatecontrol.valid" placement="right" class="form-control">
-
-            <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date is required</span>
+               <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date is required</span>
           </div>
         </div>
         <div class="form-group">

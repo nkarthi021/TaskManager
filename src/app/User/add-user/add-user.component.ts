@@ -17,12 +17,18 @@ export class AddUserComponent implements OnInit {
   constructor(private _sharedService:SharedService) { }
 
   ngOnInit() {
+    this.GetUserDetails();
+  }
 
+  GetUserDetails() {
+    this._sharedService.GetUserDetails().subscribe((data) => {this.userDetails = data});
   }
 
   Add(adduserForm: NgForm){
-    this._sharedService.AddUser(this.user).subscribe((value) => this.status= value);
+    this._sharedService.AddUser(this.user).subscribe(  (value) => {this.status= value; this.GetUserDetails()});
     adduserForm.reset();
+  
+    
   }
 
 }
