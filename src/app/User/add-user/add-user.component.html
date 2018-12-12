@@ -36,8 +36,7 @@
             <!-- /.form-group -->
             <div class="form-group">
               <div class="col-sm-9 col-sm-offset-3">
-                <button type="submit" (click)="Add(addUserForm)" [disabled]="addUserForm.invalid" class="btn btn-info">Add
-                  User</button>
+                <button type="submit" (click)="Add(addUserForm)" [disabled]="addUserForm.invalid" class="btn btn-info">{{UpdateFlag == false ? 'Add': 'Update'}}</button>
                 <button type="reset" id="reset" class="btn btn-info ml-1">Reset</button>
               </div>
             </div>
@@ -66,8 +65,7 @@
                   <input type="button" (click)="Edit(user.UserId)" class="btn btn-info" value="Edit">
                 </div>
                 <div class="btn-group ml-2" role="group">
-                  <input type="button" (click)="Delete(user.UserId)" class="btn btn-info" value="Delete ">
-                  <router-outlet></router-outlet>
+                  <input type="button" (click)="ModelPopup(content, user.UserId)" class="btn btn-info" value="Delete">
                 </div>
               </div>
             </td>
@@ -79,3 +77,18 @@
   </div>
   <!-- /form -->
 </div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Delete</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure want to delete this user?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-info" (click)="Delete()">Delete</button>
+      <button type="button" class="btn btn-info" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

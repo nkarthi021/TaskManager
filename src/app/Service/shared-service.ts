@@ -137,7 +137,7 @@ export class SharedService {
           });
       }
 
-      DeleteUser(UserId:string) {
+      DeleteUser(UserId:number) {
         
         return this._Http.post(this.DELETE_USER_URL+UserId, {
          headers: new HttpHeaders({

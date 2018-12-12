@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,7 +36,7 @@ const AppRoute : Routes = [
      ],
   imports: [
     BrowserModule,
-    AppRoutingModule, HttpClientModule, BsDatepickerModule.forRoot(), RouterModule.forRoot(AppRoute), FormsModule
+    AppRoutingModule, HttpClientModule, BsDatepickerModule.forRoot(), RouterModule.forRoot(AppRoute), FormsModule, NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
