@@ -10,35 +10,35 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 
 @Injectable()
 export class SharedService {
-    GET_ALL_TASK_URL:string ="http://localhost:8081/api/Task/GetTaskDetails";
-    GET_TASK_BY_ID_URL:string ="http://localhost:52027/api/Task/GetTask?TaskId="
-    GET_PAREENT_TASK_URL:string="http://localhost:8081/api/Task/GetTasks?TaskId=";
-    ADD_TASK_URL:string="http://localhost:8081/api/Task/Create";
+    GET_ALL_TASK_URL:string ="http://localhost:8082/api/Task/GetTaskDetails";
+    GET_TASK_BY_ID_URL:string ="http://localhost:8082/api/Task/GetTask?TaskId="
+    GET_PAREENT_TASK_URL:string="http://localhost:8082/api/Task/GetTasks?TaskId=";
+    ADD_TASK_URL:string="http://localhost:8082/api/Task/Create";
     //ADD_TASK_URL:string="http://localhost:52027/api/Task/Create";
-    UPDATE_TASK_URL:string="http://localhost:8081/api/Task/Update";
-    UPDATE_EDIT_FLAG_URL:string="http://localhost:8081/api/Task/UpdateEditFlag?TaskId=";
+    UPDATE_TASK_URL:string="http://localhost:8082/api/Task/Update";
+    UPDATE_EDIT_FLAG_URL:string="http://localhost:8082/api/Task/UpdateEditFlag?TaskId=";
 
-    GET_ALL_USERS_URL:string = "http://localhost:8081/api/User/GetUserDetails";
-    GET_USER_BY_ID_URL:string = "http://localhost:8081/api/User/GetUser?UserId=";
-    GET_USERS_URL:string = "http://localhost:8081/api/User/GetUsers";
-    GET_MANAGER_URL:string = "http://localhost:8081/api/User/GetManagers";
-    ADD_USER_URL:string = "http://localhost:8081/api/User/Create";
-    UPDATE_USER_URL:string = "http://localhost:8081/api/User/Update";
-    DELETE_USER_URL:string = "http://localhost:8081/api/User/Delete?UserId=";
+    GET_ALL_USERS_URL:string = "http://localhost:8082/api/User/GetUserDetails";
+    GET_USER_BY_ID_URL:string = "http://localhost:8082/api/User/GetUser?UserId=";
+    GET_USERS_URL:string = "http://localhost:8082/api/User/GetUsers";
+    GET_MANAGER_URL:string = "http://localhost:8082/api/User/GetManagers";
+    ADD_USER_URL:string = "http://localhost:8082/api/User/Create";
+    UPDATE_USER_URL:string = "http://localhost:8082/api/User/Update";
+    DELETE_USER_URL:string = "http://localhost:8082/api/User/Delete?UserId=";
 
-    GET_ALL_PROJECTS_URL:string = "http://localhost:8081/api/Project/GetProjectDetails";
-    GET_PROJECT_BY_ID_URL:string = "http://localhost:8081/api/Project/GetProject?ProjectId=";
-    GET_PRJECTS_URL:string = "http://localhost:8081/api/Project/GetProjects";
-    ADD_PROJECT_URL:string = "http://localhost:8081/api/Project/Create";
-    UPDATE_PROJECT_URL:string = "http://localhost:8081/api/Project/Update";
-    DELETE_PROJECT_URL:string = "http://localhost:8081/api/Project/Delete?ProjectId=";
+    GET_ALL_PROJECTS_URL:string = "http://localhost:8082/api/Project/GetProjectDetails";
+    GET_PROJECT_BY_ID_URL:string = "http://localhost:8082/api/Project/GetProject?ProjectId=";
+    GET_PRJECTS_URL:string = "http://localhost:8082/api/Project/GetProjects";
+    ADD_PROJECT_URL:string = "http://localhost:8082/api/Project/Create";
+    UPDATE_PROJECT_URL:string = "http://localhost:8082/api/Project/Update";
+    DELETE_PROJECT_URL:string = "http://localhost:8082/api/Project/Delete?ProjectId=";
     
     constructor(private _Http:HttpClient){ }
 
      // Project Services //
      GetProjectDetails(): Observable<any[]>{
         console.log('Invoking GetTaskDetils')
-        // return this._Http.get("http://localhost:8081/api/TaskManagerAPI/GetTasks").pipe(map(this.extractData));
+        // return this._Http.get("http://localhost:8082/api/TaskManagerAPI/GetTasks").pipe(map(this.extractData));
          return this._Http.get<any[]>(this.GET_ALL_PROJECTS_URL).
          pipe(catchError(this.handleError('gettasks'))) as Observable<any[]>;
      }
@@ -93,7 +93,7 @@ export class SharedService {
     // User Services //
     GetUserDetails(): Observable<any[]>{
         console.log('Invoking GetTaskDetils')
-        // return this._Http.get("http://localhost:8081/api/TaskManagerAPI/GetTasks").pipe(map(this.extractData));
+        // return this._Http.get("http://localhost:8082/api/TaskManagerAPI/GetTasks").pipe(map(this.extractData));
          return this._Http.get<any[]>(this.GET_ALL_USERS_URL).
          pipe(catchError(this.handleError('gettasks'))) as Observable<any[]>;
      }
@@ -151,7 +151,7 @@ export class SharedService {
     // Task Services //
     GetTaskDetails(): Observable<any[]>{
        console.log('Invoking GetTaskDetils')
-       // return this._Http.get("http://localhost:8081/api/TaskManagerAPI/GetTasks").pipe(map(this.extractData));
+       // return this._Http.get("http://localhost:8082/api/TaskManagerAPI/GetTasks").pipe(map(this.extractData));
         return this._Http.get<any[]>(this.GET_ALL_TASK_URL).
         pipe(catchError(this.handleError('gettasks'))) as Observable<any[]>;
     }
@@ -166,7 +166,7 @@ export class SharedService {
     GetParentTask(taskId:number) {
         
         this.GET_PAREENT_TASK_URL = this.GET_PAREENT_TASK_URL+taskId;
-        //return this._Http.get("http://localhost:8081/api/TaskManagerAPI/GetParentTask?TaskId="+ taskId +"").pipe(map(this.extractData));
+        //return this._Http.get("http://localhost:8082/api/TaskManagerAPI/GetParentTask?TaskId="+ taskId +"").pipe(map(this.extractData));
         return this._Http.get<any[]>(this.GET_PAREENT_TASK_URL);
        
     }
