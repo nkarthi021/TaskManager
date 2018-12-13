@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 @Injectable()
 export class SharedService {
     GET_ALL_TASK_URL:string ="http://localhost:8082/api/Task/GetTaskDetails";
-    GET_TASK_BY_ID_URL:string ="http://localhost:52027/api/Task/GetTask?TaskId="
+    GET_TASK_BY_ID_URL:string ="http://localhost:8082/api/Task/GetTask?TaskId="
     GET_PAREENT_TASK_URL:string="http://localhost:8082/api/Task/GetTasks?TaskId=";
     ADD_TASK_URL:string="http://localhost:8082/api/Task/Create";
     //ADD_TASK_URL:string="http://localhost:52027/api/Task/Create";
