@@ -3,7 +3,6 @@
     <div class="card">
       <div class="card-header bg-success text-white">Add Task</div>
       <div class="card-body">
-        <p>{{ task | json }}</p>
         <div class="form-group">
           <label for="task" class="col-sm-3 control-label">Task</label>
           <div class="col-sm-9">
@@ -28,22 +27,45 @@
                 <option [value]="parenttask.TaskId">{{parenttask.Task}}</option>
               </ng-container>
             </select>
-
           </div>
         </div>
+    <div class="form-group">
+          <label  class="col-sm-3 control-label">Project</label>
+          <div class="col-sm-9">
+            <select [(ngModel)]="task.Project_Id" name="parentid" class="form-control">
+              <ng-container *ngFor="let project of projects">
+                <option [value]="project.ProjectId">{{project.ProjectName}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+
+            <div class="form-group">
+          <label  class="col-sm-3 control-label">User</label>
+          <div class="col-sm-9">
+            <select [(ngModel)]="task.User_Id" name="parentid" class="form-control">
+              <ng-container *ngFor="let user of users">
+                <option [value]="user.UserId">{{user.UserName}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="startdate" class="col-sm-3 control-label">Start Date</label>
           <div class="col-sm-9">
-            <input type="text" required readonly [(ngModel)]="task.Start_Date" #startdatecontrol="ngModel" name="startdate"  bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"
-            [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched" [class.is-valid]="startdatecontrol.valid"  placement="right" class="form-control">
+            <input type="text" required readonly [(ngModel)]="task.Start_Date" [(bsValue)]="task.Start_Date" value="{{task.Start_Date | date:'dd/MM/yyyy'}}"
+              #startdatecontrol="ngModel" name="startdate" bsDatepicker [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched"
+              [class.is-valid]="startdatecontrol.valid" placement="right" class="form-control">
             <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date is required</span>
           </div>
         </div>
         <div class="form-group">
           <label for="enddate" class="col-sm-3 control-label">End Date</label>
           <div class="col-sm-9">
-            <input type="text" required readonly [(ngModel)]="task.End_Date" #enddatecontrol="ngModel" name="enddate"  bsDatepicker [bsConfig]="{dateInputFormat:'DD/MM/YYYY'}"
-            [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched" [class.is-valid]="enddatecontrol.valid"  placement="right" class="form-control">
+            <input type="text" required readonly [(ngModel)]="task.End_Date" [(bsValue)]="task.End_Date" value="{{task.End_Date | date:'dd/MM/yyyy'}}"
+              #enddatecontrol="ngModel" name="enddate" bsDatepicker [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched"
+              [class.is-valid]="enddatecontrol.valid" placement="right" class="form-control">
             <span class="invalid-tooltip" *ngIf="enddatecontrol.invalid && enddatecontrol.touched">End Date is required</span>
           </div>
         </div>

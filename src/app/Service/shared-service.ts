@@ -39,18 +39,18 @@ export class SharedService {
      GetProjectDetails(): Observable<any[]>{
         console.log('Invoking GetTaskDetils')
         // return this._Http.get("http://localhost:8081/api/TaskManagerAPI/GetTasks").pipe(map(this.extractData));
-         return this._Http.get<any[]>(this.GET_ALL_USERS_URL).
+         return this._Http.get<any[]>(this.GET_ALL_PROJECTS_URL).
          pipe(catchError(this.handleError('gettasks'))) as Observable<any[]>;
      }
  
      GetProjectById(UserId:number){
          console.log('GetTaskDetailsByID');
-              return this._Http.get<any>(this.GET_USER_BY_ID_URL+UserId);
+              return this._Http.get<any>(this.GET_PROJECT_BY_ID_URL+UserId);
      
      }
  
      GetProjects() {
-             return this._Http.get<any[]>(this.GET_USERS_URL);
+             return this._Http.get<any[]>(this.GET_PRJECTS_URL);
         
      }
 
