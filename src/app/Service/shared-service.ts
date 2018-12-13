@@ -79,7 +79,7 @@ export class SharedService {
           });
       }
 
-      DeleteProject(ProjectId:string) {
+      DeleteProject(ProjectId:number) {
         
         return this._Http.post(this.DELETE_PROJECT_URL+ProjectId, {
          headers: new HttpHeaders({
@@ -138,7 +138,7 @@ export class SharedService {
       }
 
       DeleteUser(UserId:number) {
-        
+        console.log(this.DELETE_USER_URL+UserId);
         return this._Http.post(this.DELETE_USER_URL+UserId, {
          headers: new HttpHeaders({
              'Access-Control-Allow-Origin':'*',

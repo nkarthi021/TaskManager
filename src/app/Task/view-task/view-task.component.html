@@ -55,12 +55,11 @@
                             <td>{{task.EndDate | date:'dd/MM/yyyy'}}</td>
                             <td>
                                 <div class="btn-toolbar" role="toolbar">
-                                    <div class="btn-group mr-2" role="group">
+                                    <div class="btn-group" role="group">
                                        <input type="button" [disabled]="!task.EditFlag" (click)="UpdateTask(task.TaskId)" class="btn btn-info" value="Edit Task">
                                     </div>
-                                    <div class="btn-group" role="group">
+                                    <div class="btn-group ml-2" role="group">
                                         <input type="button" *ngIf="task.EditFlag" (click)="UpdateEditFlag(task.TaskId)" class="btn btn-info" value="End Task">
-                                        <router-outlet></router-outlet>
                                     </div>
                                 </div>
                             </td>

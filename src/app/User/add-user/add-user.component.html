@@ -1,6 +1,8 @@
-<div class="container-fluid mt-5">
-  <div class="form-row">
-    <div class="col-lg-4 col-md-4 col-sm-12">
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+<ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+<div class="container-fluid mt-3">
+   <div class="form-row">
+    <div class="col-lg-3 col-md-3 col-sm-12">
       <form #addUserForm="ngForm" novalidate class="form-horizontal" role="form">
         <div class="card">
           <div class="card-header bg-success text-white">Add User</div>
@@ -44,7 +46,7 @@
         </div>
       </form>
     </div>
-    <div class="col-lg-7 col-md-7 col-sm-12">
+    <div class="col-lg-9 col-md-9 col-sm-12">
       <table class="table table-bordered table-stripped">
         <thead class="bg-success text-white">
           <tr>
@@ -85,7 +87,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <p>Are you sure want to delete this user?</p>
+      <p>Are you sure do you want delete this user?</p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-info" (click)="Delete()">Delete</button>
