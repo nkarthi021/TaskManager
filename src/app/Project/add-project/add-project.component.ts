@@ -18,10 +18,11 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 export class AddProjectComponent implements OnInit {
   project: Project = { Project_Id: 0, Name: "", Priority: 0, Start_Date: "", End_Date: "", Manager_Id: 0 };
   Managers: any[];
-  projectDetails: any[];
+  public projectDetails: any;
   Status: any;
   UpdateFlag: boolean = false;
   ProjectId:number;
+  setDateFlag:boolean=false;
 
   private _success = new Subject<string>();
   private _error = new Subject<string>();
@@ -120,6 +121,10 @@ export class AddProjectComponent implements OnInit {
     });
   }
 
-
+  onSetDateChange(event:any){
+    console.log('check event');
+    this.setDateFlag = !this.setDateFlag;
+    if(!this.setDateFlag){this.project.Start_Date=null; this.project.End_Date=null;}
+  }
 
 }

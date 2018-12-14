@@ -36,10 +36,17 @@
 
               </div>
             </div>
+            <div class="form-check">
+                <div class="col-sm-12">
+                  <input type="checkbox" [ngModel]="setDateFlag" (ngModelChange)="onSetDateChange($event)" name="ManagerFlag" class="form-check-input">
+                  <label class="form-check-label">set Start Date and End Date</label>
+                </div>
+              </div>
+             
             <div class="form-group">
               <label for="startdate" class="col-sm-5 control-label">Start Date</label>
               <div class="col-sm-9">
-                <input type="text" required readonly [(ngModel)]="project.Start_Date" [(bsValue)]="project.Start_Date"
+                <input type="text" [required]="setDateFlag" [disabled]="!setDateFlag" [(ngModel)]="project.Start_Date"  [(bsValue)]="project.Start_Date"
                   value="{{project.Start_Date | date:'dd/MM/yyyy'}}" #startdatecontrol="ngModel" name="startdate"
                   bsDatepicker [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched"
                   [class.is-valid]="startdatecontrol.valid" placement="right" class="form-control">
@@ -50,7 +57,7 @@
             <div class="form-group">
               <label for="enddate" class="col-sm-5 control-label">End Date</label>
               <div class="col-sm-9">
-                <input type="text" required readonly [(ngModel)]="project.End_Date" [(bsValue)]="project.End_Date"
+                <input type="text" [required]="setDateFlag" [disabled]="!setDateFlag" [(ngModel)]="project.End_Date" [(bsValue)]="project.End_Date"
                   value="{{project.End_Date | date:'dd/MM/yyyy'}}" #enddatecontrol="ngModel" name="enddate"
                   bsDatepicker [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched" [class.is-valid]="enddatecontrol.valid"
                   placement="right" class="form-control">
@@ -58,6 +65,7 @@
                   required</span>
               </div>
             </div>
+          
 
           </div>
           <div class="card-footer">
@@ -75,18 +83,18 @@
       <!-- /form -->
     </div>
     <div class="col-lg-7 col-md-7 col-sm-12">
-      <table class="table table-bordered table-stripped">
+      <table class="table table-bordered table-stripped" [mfData]="projectDetails" #mf="mfDataTable"  [mfRowsOnPage]="10">
         <thead class="bg-success text-white">
           <tr>
-            <th scope="col">Project Name</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
-            <th scope="col">Manager</th>
+            <th scope="col"><mfDefaultSorter by="Name">Project Name</mfDefaultSorter></th>
+            <th scope="col"><mfDefaultSorter by="Priority">Priority</mfDefaultSorter></th>
+            <th scope="col"><mfDefaultSorter by="StartDate">Start Date</mfDefaultSorter></th>
+            <th scope="col"><mfDefaultSorter by="EndDate">End Date</mfDefaultSorter></th>
+            <th scope="col"><mfDefaultSorter by="Manager">Manager</mfDefaultSorter></th>
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody *ngFor="let project of projectDetails">
+        <tbody *ngFor="let project of mf.data">
           <tr>
             <td>{{project.Name}}</td>
             <td>{{project.Priority}}</td>
@@ -106,6 +114,13 @@
           </tr>
 
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6">
+              <mfBootstrapPaginator></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>
