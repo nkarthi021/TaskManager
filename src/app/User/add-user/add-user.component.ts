@@ -15,7 +15,7 @@ import { SharedService } from '../../Service/shared-service'
 })
 export class AddUserComponent implements OnInit {
   user:User = { User_Id:0, First_Name:"", Last_Name:"", Manager_Flag :false };
-  userDetails: any[];
+  public userDetails: any;
   status:any;
   UpdateFlag:boolean=false;
   UserId:number;

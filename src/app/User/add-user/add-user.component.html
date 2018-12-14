@@ -47,34 +47,41 @@
       </form>
     </div>
     <div class="col-lg-9 col-md-9 col-sm-12">
-      <table class="table table-bordered table-stripped">
-        <thead class="bg-success text-white">
-          <tr>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Manager</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let user of userDetails">
-          <tr>
-            <td>{{user.FirstName}}</td>
-            <td>{{user.LastName}}</td>
-            <td>{{user.Manager}}</td>
-            <td>
-              <div class=" btn-toolbar" role="toolbar">
-                <div class="btn-group" role="group">
-                  <input type="button" (click)="Edit(user.UserId)" class="btn btn-info" value="Edit">
+       <table class="table table-bordered table-stripped"  [mfData]="userDetails" #mf="mfDataTable" [mfRowsOnPage]="10">
+          <thead class="bg-success text-white">
+            <tr>
+              <th scope="col"><mfDefaultSorter by="FirstName">First Name</mfDefaultSorter></th>
+              <th scope="col"><mfDefaultSorter by="LastName">Last Name</mfDefaultSorter></th>
+              <th scope="col"><mfDefaultSorter by="Manager">Manager</mfDefaultSorter></th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let user of mf.data">
+            <tr>
+              <td>{{user.FirstName}}</td>
+              <td>{{user.LastName}}</td>
+              <td>{{user.Manager}}</td>
+              <td>
+                <div class=" btn-toolbar" role="toolbar">
+                  <div class="btn-group" role="group">
+                    <input type="button" (click)="Edit(user.UserId)" class="btn btn-info" value="Edit">
+                  </div>
+                  <div class="btn-group ml-2" role="group">
+                    <input type="button" (click)="ModelPopup(content, user.UserId)" class="btn btn-info" value="Delete">
+                  </div>
                 </div>
-                <div class="btn-group ml-2" role="group">
-                  <input type="button" (click)="ModelPopup(content, user.UserId)" class="btn btn-info" value="Delete">
-                </div>
-              </div>
-            </td>
-          </tr>
-
-        </tbody>
-      </table>
+              </td>
+            </tr>
+  
+          </tbody>
+          <tfoot>
+              <tr>
+                  <td colspan="4">
+                      <mfBootstrapPaginator></mfBootstrapPaginator>
+                  </td>
+              </tr>
+              </tfoot>
+        </table>
     </div>
   </div>
   <!-- /form -->
