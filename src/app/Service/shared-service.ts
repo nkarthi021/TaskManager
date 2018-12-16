@@ -157,17 +157,13 @@ export class SharedService {
     }
 
     GetTaskDetailsByTaskId(TaskId:number){
-        console.log('GetTaskDetailsByID');
-        this.GET_TASK_BY_ID_URL = this.GET_TASK_BY_ID_URL+TaskId
-        return this._Http.get<any>(this.GET_TASK_BY_ID_URL);
+           return this._Http.get<any>(this.GET_TASK_BY_ID_URL+TaskId);
     
     }
 
     GetParentTask(taskId:number) {
-        
-        this.GET_PAREENT_TASK_URL = this.GET_PAREENT_TASK_URL+taskId;
         //return this._Http.get("http://localhost:8082/api/TaskManagerAPI/GetParentTask?TaskId="+ taskId +"").pipe(map(this.extractData));
-        return this._Http.get<any[]>(this.GET_PAREENT_TASK_URL);
+        return this._Http.get<any[]>(this.GET_PAREENT_TASK_URL+taskId);
        
     }
 

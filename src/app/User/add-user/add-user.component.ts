@@ -1,10 +1,10 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { User } from '../user'
+import { User, UserFilter } from '../user'
 import { SharedService } from '../../Service/shared-service'
 
 @Component({
@@ -15,6 +15,7 @@ import { SharedService } from '../../Service/shared-service'
 })
 export class AddUserComponent implements OnInit {
   user:User = { User_Id:0, First_Name:"", Last_Name:"", Manager_Flag :false };
+  userFilter:UserFilter = { FirstName:null, LastName:null };
   public userDetails: any;
   status:any;
   UpdateFlag:boolean=false;

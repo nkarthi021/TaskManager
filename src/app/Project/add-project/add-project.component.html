@@ -47,7 +47,7 @@
               <label for="startdate" class="col-sm-5 control-label">Start Date</label>
               <div class="col-sm-9">
                 <input type="text" [required]="setDateFlag" [disabled]="!setDateFlag" [(ngModel)]="project.Start_Date"  [(bsValue)]="project.Start_Date"
-                  value="{{project.Start_Date | date:'dd/MM/yyyy'}}" #startdatecontrol="ngModel" name="startdate"
+                  value="{{project.Start_Date | date:'dd/MM/yyyy'}}" [bsConfig]="startdatePickerConfig" #startdatecontrol="ngModel" name="startdate"
                   bsDatepicker [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched"
                   [class.is-valid]="startdatecontrol.valid" placement="right" class="form-control">
                 <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date
@@ -58,7 +58,7 @@
               <label for="enddate" class="col-sm-5 control-label">End Date</label>
               <div class="col-sm-9">
                 <input type="text" [required]="setDateFlag" [disabled]="!setDateFlag" [(ngModel)]="project.End_Date" [(bsValue)]="project.End_Date"
-                  value="{{project.End_Date | date:'dd/MM/yyyy'}}" #enddatecontrol="ngModel" name="enddate"
+                  value="{{project.End_Date | date:'dd/MM/yyyy'}}" [bsConfig]="enddatePickerConfig" #enddatecontrol="ngModel" name="enddate"
                   bsDatepicker [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched" [class.is-valid]="enddatecontrol.valid"
                   placement="right" class="form-control">
                 <span class="invalid-tooltip" *ngIf="enddatecontrol.invalid && enddatecontrol.touched">End Date is
@@ -82,8 +82,43 @@
       </form>
       <!-- /form -->
     </div>
-    <div class="col-lg-7 col-md-7 col-sm-12">
-      <table class="table table-bordered table-stripped" [mfData]="projectDetails" #mf="mfDataTable"  [mfRowsOnPage]="10">
+    <div class="col-lg-8 col-md-8 col-sm-12">
+      <div class="card">
+        <div class="card-header bg-success text-white">Project Details</div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="task">Project</label>
+              <input type="text" [(ngModel)]="projectFilter.Project" name="project" class="form-control" id="task">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="parenttask">Manager</label>
+              <input type="text" [(ngModel)]="projectFilter.Manager" name="manager" class="form-control" id="parenttask">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group  col-md-3">
+              <label for="priorityfrom">Priority From</label>
+              <input type="number" [(ngModel)]="projectFilter.PriorityFrom" name="PriorityFrom" class="form-control" id="priorityfrom">
+            </div>
+            <div class="form-group  col-md-3">
+              <label for="priorityto">Priority To</label>
+              <input type="number" [(ngModel)]="projectFilter.PriorityTo" name="PriorityTo" class="form-control" id="priorityto">
+            </div>
+            <div class="form-group  col-md-3">
+              <label for="startdate">Start Date</label>
+              <input type="text" [(ngModel)]="projectFilter.StartDate" [(bsValue)]="projectFilter.StartDate" value="{{projectFilter.StartDate | date:'dd/MM/yyyy'}}"
+                bsDatepicker placement="right" name="StartDate" class="form-control" id="startdate">
+            </div>
+            <div class="form-group  col-md-3">
+              <label for="enddate">End Date</label>
+              <input type="text" [(ngModel)]="projectFilter.EndDate" [(bsValue)]="projectFilter.EndDate" value="{{projectFilter.EndDate | date:'dd/MM/yyyy'}}"
+                bsDatepicker placement="right" name="EndDate" class="form-control" id="EndDate">
+              <!-- <input type="date" [(ngModel)]="taskFilter.EndDate" name="EndDate" class="form-control" id="enddate"> -->
+            </div>
+          </div>
+          <hr>
+          <table class="table table-bordered table-stripped" [mfData]="projectDetails" #mf="mfDataTable"  [mfRowsOnPage]="10">
         <thead class="bg-success text-white">
           <tr>
             <th scope="col"><mfDefaultSorter by="Name">Project Name</mfDefaultSorter></th>
@@ -94,7 +129,7 @@
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody *ngFor="let project of mf.data">
+        <tbody *ngFor="let project of mf.data | projectfilter : {Project:projectFilter.Project,Manager:projectFilter.Manager,PriorityFrom:projectFilter.PriorityFrom,PriorityTo:projectFilter.PriorityTo,StartDate:projectFilter.StartDate,EndDate:projectFilter.EndDate }">
           <tr>
             <td>{{project.Name}}</td>
             <td>{{project.Priority}}</td>
@@ -122,6 +157,8 @@
           </tr>
         </tfoot>
       </table>
+       </div>
+      </div>
     </div>
   </div>
 </div>

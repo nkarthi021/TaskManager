@@ -1,86 +1,175 @@
-<div class="container">
-    <form #addtaskFrom="ngForm" novalidate class="form-horizontal"  role="form">
-    <div class="card">
-      <div class="card-header bg-success text-white">Add Task</div>
-      <div class="card-body">
-        <div class="form-group">
-          <label for="task" class="col-sm-3 control-label">Task</label>
-          <div class="col-sm-9">
-            <input type="text" required [(ngModel)]="task.Name" name="task" #taskcontrol="ngModel" class="form-control"
-            [class.is-invalid]="taskcontrol.invalid && taskcontrol.touched" [class.is-valid]="taskcontrol.valid" >
-            <span class="invalid-tooltip" *ngIf="taskcontrol.invalid && taskcontrol.touched">Task is required</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="Priority" class="col-sm-3 control-label">Priority</label>
-          <div class="col-sm-9">
-            <input type="range" required [(ngModel)]="task.Priority" name="priority" #prioritycontrol="ngModel" min="1" max="30" step="1" class="custom-range"
-            [class.is-invalid]="prioritycontrol.invalid && prioritycontrol.touched" [class.is-valid]="prioritycontrol.valid">
-            <span class="invalid-feedback" *ngIf="prioritycontrol.invalid && prioritycontrol.touched">Priority is required</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label  class="col-sm-3 control-label">Parent Task </label>
-          <div class="col-sm-9">
-            <select [(ngModel)]="task.Parent_Id" name="parentid" class="form-control">
-              <ng-container *ngFor="let parenttask of parenttasks">
-                <option [value]="parenttask.TaskId">{{parenttask.Task}}</option>
-              </ng-container>
-            </select>
-          </div>
-        </div>
-    <div class="form-group">
-          <label  class="col-sm-3 control-label">Project</label>
-          <div class="col-sm-9">
-            <select [(ngModel)]="task.Project_Id" name="parentid" class="form-control">
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+<ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+<div class="container-fluid mt-3">
+  <div class="form-row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <form #addtaskFrom="ngForm" novalidate class="form-horizontal" role="form">
+        <div class="card">
+          <div class="card-header bg-success text-white">Task</div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="task" class="col-sm-12 control-label">Task</label>
+              <div class="col-sm-9">
+                <input type="text" required [(ngModel)]="task.Name" name="task" #taskcontrol="ngModel" class="form-control" [class.is-invalid]="taskcontrol.invalid && taskcontrol.touched"
+                  [class.is-valid]="taskcontrol.valid">
+                <span class="invalid-tooltip" *ngIf="taskcontrol.invalid && taskcontrol.touched">Task is required</span>
+              </div>
+            </div>
+            <div class="form-check">
+              <div class="col-sm-9">
+                <input type="checkbox" [ngModel]="hasParentTaskFlag" (ngModelChange)="onParentTaskFlagChange($event)" name="ParentTaskFlag" class="form-check-input">
+                <label class="form-check-label">Has Parent Task</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Project</label>
+              <div class="col-sm-9">
+                <select [(ngModel)]="task.Project_Id" name="projecctid" class="form-control">
               <ng-container *ngFor="let project of projects">
                 <option [value]="project.ProjectId">{{project.ProjectName}}</option>
               </ng-container>
             </select>
-          </div>
-        </div>
-
+              </div>
+            </div>
             <div class="form-group">
-          <label  class="col-sm-3 control-label">User</label>
-          <div class="col-sm-9">
-            <select [(ngModel)]="task.User_Id" name="parentid" class="form-control">
+              <label class="col-sm-12 control-label">User</label>
+              <div class="col-sm-9">
+                <select [(ngModel)]="task.User_Id" name="userid" class="form-control">
               <ng-container *ngFor="let user of users">
                 <option [value]="user.UserId">{{user.UserName}}</option>
               </ng-container>
             </select>
+              </div>
+            </div>
+            <div class="form-group" [class.d-none]="!hasParentTaskFlag">
+              <label class="col-sm-12 control-label">Parent Task </label>
+              <div class="col-sm-9">
+                <select [(ngModel)]="task.Parent_Id" [required]="hasParentTaskFlag" name="parentid" class="form-control">
+              <ng-container *ngFor="let parenttask of parenttasks">
+                <option [value]="parenttask.TaskId">{{parenttask.Task}}</option>
+              </ng-container>
+            </select>
+              </div>
+            </div>
+            <div class="form-group" [class.d-none]="hasParentTaskFlag">
+              <label for="Priority" class="col-sm-12 control-label">Priority</label>
+              <div class="col-sm-9">
+                <input type="range" [required]="!hasParentTaskFlag" [(ngModel)]="task.Priority" name="priority" #prioritycontrol="ngModel" min="1" max="30" step="1"
+                  class="custom-range" [class.is-invalid]="prioritycontrol.invalid && prioritycontrol.touched" [class.is-valid]="prioritycontrol.valid">
+                <span class="invalid-feedback" *ngIf="prioritycontrol.invalid && prioritycontrol.touched">Priority is required</span>
+              </div>
+            </div>
+            <div class="form-group" [class.d-none]="hasParentTaskFlag">
+              <label for="startdate" class="col-sm-12 control-label">Start Date</label>
+              <div class="col-sm-9">
+                <input type="text" [required]="!hasParentTaskFlag" readonly [(ngModel)]="task.Start_Date" [(bsValue)]="task.Start_Date" value="{{task.Start_Date | date:'dd/MM/yyyy'}}"
+                  #startdatecontrol="ngModel" name="startdate" bsDatepicker [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched"
+                  [class.is-valid]="startdatecontrol.valid" placement="right" class="form-control">
+                <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date is required</span>
+              </div>
+            </div>
+            <div class="form-group" [class.d-none]="hasParentTaskFlag">
+              <label for="enddate" class="col-sm-12 control-label">End Date</label>
+              <div class="col-sm-9">
+                <input type="text" [required]="!hasParentTaskFlag" readonly [(ngModel)]="task.End_Date" [(bsValue)]="task.End_Date" value="{{task.End_Date | date:'dd/MM/yyyy'}}"
+                  #enddatecontrol="ngModel" name="enddate" bsDatepicker [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched"
+                  [class.is-valid]="enddatecontrol.valid" placement="right" class="form-control">
+                <span class="invalid-tooltip" *ngIf="enddatecontrol.invalid && enddatecontrol.touched">End Date is required</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer" *ngIf="!viewFlag">
+            <!-- /.form-group -->
+            <div class="form-group">
+              <div class="col-sm-9 col-sm-offset-3">
+                <button type="submit" (click)="AddTask(addtaskFrom)" [disabled]="addtaskFrom.invalid" class="btn btn-info">{{ updateFlag == false ? 'Add' : 'Update'}}</button>
+                <button type="reset" id="reset" class="btn btn-info ml-1">Reset</button>
+              </div>
+            </div>
           </div>
         </div>
+      </form>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-12">
+     <div class="card">
+        <div class="card-header bg-success text-white">Task Details</div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="task">Task</label>
+              <input type="text" [(ngModel)]="taskFilter.Task" name="task" class="form-control" id="task">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="parenttask">Parent Task</label>
+              <input type="text" [(ngModel)]="taskFilter.ParentTask" name="parenttask" class="form-control" id="parenttask">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group  col-md-3">
+              <label for="priorityfrom">Priority From</label>
+              <input type="number" [(ngModel)]="taskFilter.PriorityFrom" name="PriorityFrom" class="form-control" id="priorityfrom">
+            </div>
+            <div class="form-group  col-md-3">
+              <label for="priorityto">Priority To</label>
+              <input type="number" [(ngModel)]="taskFilter.PriorityTo" name="PriorityTo" class="form-control" id="priorityto">
+            </div>
+            <div class="form-group  col-md-3">
+              <label for="startdate">Start Date</label>
+              <input type="text" [(ngModel)]="taskFilter.StartDate" [(bsValue)]="taskFilter.StartDate" value="{{taskFilter.StartDate | date:'dd/MM/yyyy'}}"
+                bsDatepicker placement="right" name="StartDate" class="form-control" id="startdate">
+            </div>
+            <div class="form-group  col-md-3">
+              <label for="enddate">End Date</label>
+              <input type="text" [(ngModel)]="taskFilter.EndDate" [(bsValue)]="taskFilter.EndDate" value="{{taskFilter.EndDate | date:'dd/MM/yyyy'}}"
+                bsDatepicker placement="right" name="EndDate" class="form-control" id="EndDate">
+              <!-- <input type="date" [(ngModel)]="taskFilter.EndDate" name="EndDate" class="form-control" id="enddate"> -->
+            </div>
+          </div>
+          <hr>
+          <table class="table table-bordered table-striped" [mfData]="taskDetails" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col"><mfDefaultSorter by="Task">Task</mfDefaultSorter></th>
+                <th scope="col"><mfDefaultSorter by="ParentTask">Parent Task</mfDefaultSorter></th>
+                <th scope="col"><mfDefaultSorter by="Priority">Priority</mfDefaultSorter></th>
+                <th scope="col"><mfDefaultSorter by="StartDate">Start Date</mfDefaultSorter></th>
+                <th scope="col"><mfDefaultSorter by="EndDate">End Date</mfDefaultSorter></th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let task of mf.data | viewtaskfilter: {Task:taskFilter.Task,ParentTask:taskFilter.ParentTask,PriorityFrom:taskFilter.PriorityFrom,PriorityTo:taskFilter.PriorityTo,StartDate:taskFilter.StartDate,EndDate:taskFilter.EndDate}">
+              <tr>
+                <td>{{task.Task}}</td>
+                <td>{{task.ParentTask}}</td>
+                <td>{{task.Priority}}</td>
+                <td>{{task.StartDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{task.EndDate | date:'dd/MM/yyyy'}}</td>
+                <td>
+                  <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group" role="group">
+                      <!-- <input type="button" [disabled]="!task.EditFlag" (click)="Edit(task.TaskId)" class="btn btn-info" value="Edit Task"> -->
+                      <button type="button" (click)="Edit(task.TaskId,task.EditFlag)" class="btn btn-info">{{task.EditFlag == false ? 'View':'Edit' }}</button>
+                    </div>
+                    <div class="btn-group ml-2" role="group">
+                      <input type="button" *ngIf="task.EditFlag" (click)="UpdateEditFlag(task.TaskId)" class="btn btn-info" value="End Task">
+                    </div>
+                  </div>
+                </td>
+              </tr>
 
-        <div class="form-group">
-          <label for="startdate" class="col-sm-3 control-label">Start Date</label>
-          <div class="col-sm-9">
-            <input type="text" required readonly [(ngModel)]="task.Start_Date" [(bsValue)]="task.Start_Date" value="{{task.Start_Date | date:'dd/MM/yyyy'}}"
-              #startdatecontrol="ngModel" name="startdate" bsDatepicker [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched"
-              [class.is-valid]="startdatecontrol.valid" placement="right" class="form-control">
-            <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date is required</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="enddate" class="col-sm-3 control-label">End Date</label>
-          <div class="col-sm-9">
-            <input type="text" required readonly [(ngModel)]="task.End_Date" [(bsValue)]="task.End_Date" value="{{task.End_Date | date:'dd/MM/yyyy'}}"
-              #enddatecontrol="ngModel" name="enddate" bsDatepicker [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched"
-              [class.is-valid]="enddatecontrol.valid" placement="right" class="form-control">
-            <span class="invalid-tooltip" *ngIf="enddatecontrol.invalid && enddatecontrol.touched">End Date is required</span>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <!-- /.form-group -->
-        <div class="form-group">
-          <div class="col-sm-9 col-sm-offset-3">
-            <button type="submit" (click)="AddTask(addtaskFrom)" [disabled]="addtaskFrom.invalid" class="btn btn-info">Add Task</button>
-            <button type="reset" id="reset" class="btn btn-info ml-1">Reset</button>
-          </div>
+            </tbody>
+             <tfoot>
+              <tr>
+                  <td colspan="6">
+                      <mfBootstrapPaginator></mfBootstrapPaginator>
+                  </td>
+              </tr>
+              </tfoot>
+          </table>
         </div>
       </div>
     </div>
-  </form>
+  </div>
   <!-- /form -->
 </div>
 <!-- ./container -->

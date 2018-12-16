@@ -4,3 +4,9 @@ export class User {
     Last_Name:string;
     Manager_Flag:boolean;
 }
+
+export class UserFilter {
+    FirstName:string;
+    LastName:string;
+
+}

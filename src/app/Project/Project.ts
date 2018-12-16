@@ -6,3 +6,12 @@ export class Project {
     Priority:number;
     Manager_Id:number;
 }
+
+export class ProjectFilter {
+    Project:string;
+    Manager:string;
+    PriorityFrom:number;
+    PriorityTo:number;
+    StartDate:string;
+    EndDate:string
+}

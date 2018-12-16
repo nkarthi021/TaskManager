@@ -1,1 +1,16 @@
+npm i --save angular-6-datatable 
 npm install --save @ng-bootstrap/ng-bootstrap
+
+create table Task
+(
+	Task_Id int IDENTITY(1,1) primary key NOT NULL,
+	Parent_Id int NULL,
+	Name varchar(100) NOT NULL,
+	Start_Date date,
+	End_Date date,
+	Priority int,
+	Edit_Flag bit NOT NULL,
+	User_Id int foreign key references [User](User_Id) not null,
+	Project_Id int foreign key references Project(Project_Id) not null
+
+)

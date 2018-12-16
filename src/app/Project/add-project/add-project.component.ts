@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { BsDatepickerConfig  } from 'ngx-bootstrap/datepicker';
 import { NgbModal }  from '@ng-bootstrap/ng-bootstrap';
+import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 
-import { Project } from '../Project';
+import { Project, ProjectFilter } from '../Project';
 import { SharedService } from '../../Service/shared-service'
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 
@@ -17,6 +19,9 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 })
 export class AddProjectComponent implements OnInit {
   project: Project = { Project_Id: 0, Name: "", Priority: 0, Start_Date: "", End_Date: "", Manager_Id: 0 };
+  projectFilter:ProjectFilter = { Project:null, Manager:null, PriorityFrom:null, PriorityTo:null, StartDate:null, EndDate:null };
+  startdatePickerConfig : Partial<BsDatepickerConfig>;
+  enddatePickerConfig : Partial<BsDatepickerConfig>;
   Managers: any[];
   public projectDetails: any;
   Status: any;
@@ -31,7 +36,12 @@ export class AddProjectComponent implements OnInit {
   successMessage:string;
   errorMessage:string;
 
-  constructor(private _sharedService: SharedService, private _modalService:NgbModal) { }
+  constructor(private _sharedService: SharedService, private _modalService:NgbModal) {
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate()+1);
+    this.startdatePickerConfig = Object.assign({}, { showWeekNumbers:false, minDate: new Date() });
+     this.enddatePickerConfig = Object.assign({}, {  showWeekNumbers:false, minDate: tomorrow  });
+   }
 
   ngOnInit() {
     this.GetManagers();
@@ -125,6 +135,13 @@ export class AddProjectComponent implements OnInit {
     console.log('check event');
     this.setDateFlag = !this.setDateFlag;
     if(!this.setDateFlag){this.project.Start_Date=null; this.project.End_Date=null;}
+    else {
+      let today = new Date();
+      let tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate()+1);
+      this.project.Start_Date =  formatDate(today, 'yyyy-MM-dd', 'en-Us');
+      this.project.End_Date =  formatDate(tomorrow, 'yyyy-MM-dd', 'en-Us');
+    }
   }
 
 }

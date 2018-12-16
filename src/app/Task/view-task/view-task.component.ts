@@ -32,9 +32,7 @@ export class ViewTaskComponent implements OnInit {
   }
 
   UpdateEditFlag(TaskId:number){
-    console.log(TaskId);
-    this._sharedService.UpdateEditFlag(TaskId,false).subscribe((data) => {this.status=data;this.GetTaskDetails()});
-    
+     this._sharedService.UpdateEditFlag(TaskId,false).subscribe((data) => {this.status=data;this.GetTaskDetails()});
   }
   UpdateTask(TaskId:number) {
      this._router.navigate(["/updatetask", TaskId]);

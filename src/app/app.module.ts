@@ -15,6 +15,8 @@ import { UpdateTaskComponent } from './Task/update-task/update-task.component';
 import { ViewTaskFilterPipe } from './Filter/view-task-filter.pipe';
 import { AddUserComponent } from './User/add-user/add-user.component';
 import { AddProjectComponent } from './Project/add-project/add-project.component';
+import { ProjectFilterPipe } from './Filter/project-filter.pipe'
+import { UserFilterPipe } from './Filter/user-filter.pipe';
 
 const AppRoute : Routes = [
   {path:'addtask', component:AddTaskComponent },
@@ -33,7 +35,9 @@ const AppRoute : Routes = [
     UpdateTaskComponent,
     ViewTaskFilterPipe,
     AddUserComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    ProjectFilterPipe,
+    UserFilterPipe
      ],
   imports: [
     BrowserModule,

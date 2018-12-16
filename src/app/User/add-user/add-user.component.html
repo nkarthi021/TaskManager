@@ -1,5 +1,5 @@
-<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-<ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+ <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+<ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert> 
 <div class="container-fluid mt-3">
    <div class="form-row">
     <div class="col-lg-3 col-md-3 col-sm-12">
@@ -47,7 +47,21 @@
       </form>
     </div>
     <div class="col-lg-9 col-md-9 col-sm-12">
-       <table class="table table-bordered table-stripped"  [mfData]="userDetails" #mf="mfDataTable" [mfRowsOnPage]="10">
+      <div class="card">
+        <div class="card-header bg-success text-white">Project Details</div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="firstname">First Name</label>
+              <input type="text" [(ngModel)]="userFilter.FirstName" name="firstname" class="form-control" id="firstname">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastname">Last Name</label>
+              <input type="text" [(ngModel)]="userFilter.LastName" name="lastname" class="form-control" id="lastname">
+            </div>
+          </div>
+          <hr>
+          <table class="table table-bordered table-stripped"  [mfData]="userDetails" #mf="mfDataTable" [mfRowsOnPage]="10">
           <thead class="bg-success text-white">
             <tr>
               <th scope="col"><mfDefaultSorter by="FirstName">First Name</mfDefaultSorter></th>
@@ -56,7 +70,7 @@
               <th scope="col">Action</th>
             </tr>
           </thead>
-          <tbody *ngFor="let user of mf.data">
+          <tbody *ngFor="let user of mf.data | userfilter : {FirstName:userFilter.FirstName, LastName:userFilter.LastName }">
             <tr>
               <td>{{user.FirstName}}</td>
               <td>{{user.LastName}}</td>
@@ -82,6 +96,8 @@
               </tr>
               </tfoot>
         </table>
+        </div>
+      </div>
     </div>
   </div>
   <!-- /form -->

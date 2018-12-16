@@ -4,8 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { RouterModule } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DataTableModule } from 'angular-6-datatable'
 
 import { AddTaskComponent } from './add-task.component';
+import { ViewTaskFilterPipe } from '../../Filter/view-task-filter.pipe';
 import { SharedService } from '../../Service/shared-service'
 
 
@@ -16,8 +19,8 @@ describe('AddTaskComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddTaskComponent ],
-      imports:[FormsModule,HttpClientModule, BsDatepickerModule.forRoot(),RouterTestingModule],
+      declarations: [ AddTaskComponent, ViewTaskFilterPipe ],
+      imports:[FormsModule,HttpClientModule, BsDatepickerModule.forRoot(),RouterTestingModule, NgbModule.forRoot(), DataTableModule],
       providers:[SharedService]
     })
     .compileComponents();
