@@ -119,7 +119,13 @@ export class AddTaskComponent implements OnInit {
      this._sharedService.UpdateEditFlag(TaskId,false).subscribe((data) => {this.Status=data; this.viewFlag=true; this.GetTaskDetails(); });
   }
   
-
+reset(form:NgForm){
+    form.reset();
+    this.updateFlag = false;
+    this.viewFlag = false;
+    this.hasParentTaskFlag =false;
+    this.task = { Name:"", Parent_Id:0, Task_Id:0, Priority:1, Start_Date:null, End_Date:null, Edit_Flag:true, User_Id:0, Project_Id:0 } ;
+  }
 
 
 

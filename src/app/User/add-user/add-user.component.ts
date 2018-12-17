@@ -107,4 +107,9 @@ export class AddUserComponent implements OnInit {
         this._ModalService.dismissAll();})
   }
 
+  reset(form:NgForm){
+    form.reset();
+    this.UpdateFlag = false;
+  }
+
 }

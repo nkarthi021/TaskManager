@@ -19,12 +19,12 @@ import { ProjectFilterPipe } from './Filter/project-filter.pipe'
 import { UserFilterPipe } from './Filter/user-filter.pipe';
 
 const AppRoute : Routes = [
-  {path:'addtask', component:AddTaskComponent },
+  {path:'task', component:AddTaskComponent },
   {path:'updatetask/:TaskId', component:UpdateTaskComponent},
   {path:'viewtask', component:ViewTaskComponent},
-  {path:'adduser', component:AddUserComponent},
-  {path:'addproject', component:AddProjectComponent},
-  {path:'', component:ViewTaskComponent}
+  {path:'user', component:AddUserComponent},
+  {path:'project', component:AddProjectComponent},
+  {path:'', component:AddTaskComponent}
 ]
 
 @NgModule({

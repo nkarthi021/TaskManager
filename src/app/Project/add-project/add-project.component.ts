@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig  } from 'ngx-bootstrap/datepicker';
 import { NgbModal }  from '@ng-bootstrap/ng-bootstrap';
-import { formatDate } from '@angular/common';
+import { formatDate, DatePipe } from '@angular/common';
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 
@@ -102,7 +102,11 @@ export class AddProjectComponent implements OnInit {
   }
 
   Edit(ProjectId: number) {
-    this._sharedService.GetProjectById(ProjectId).subscribe((data) => { this.project = data; this.UpdateFlag = true; })
+    this._sharedService.GetProjectById(ProjectId).subscribe((data) => { 
+      this.project = data;
+      this.setDateFlag = false;
+      if(this.project.Start_Date !=null) {this.setDateFlag = true;}
+      this.UpdateFlag = true; })
   }
 
   OpenModalPopup(Content, ProjectId:number){
@@ -139,9 +143,17 @@ export class AddProjectComponent implements OnInit {
       let today = new Date();
       let tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate()+1);
-      this.project.Start_Date =  formatDate(today, 'yyyy-MM-dd', 'en-Us');
-      this.project.End_Date =  formatDate(tomorrow, 'yyyy-MM-dd', 'en-Us');
+      this.project.Start_Date =  formatDate(today, 'dd/MM/yyyy', 'en-US');
+      this.project.End_Date =  formatDate(tomorrow, 'dd/MM/yyyy', 'en-US');
+      console.log(this.project.Start_Date);
     }
+  }
+
+   reset(form:NgForm){
+     form.reset();
+    this.project = { Project_Id: 0, Name: "", Priority: 0, Start_Date: "", End_Date: "", Manager_Id: 0 };
+    this.setDateFlag=false;
+    this.UpdateFlag = false;
   }
 
 }

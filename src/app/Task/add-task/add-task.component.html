@@ -5,7 +5,7 @@
     <div class="col-lg-4 col-md-4 col-sm-12">
       <form #addtaskFrom="ngForm" novalidate class="form-horizontal" role="form">
         <div class="card">
-          <div class="card-header bg-success text-white">Task</div>
+          <div class="card-header bg-info text-white">Task</div>
           <div class="card-body">
             <div class="form-group">
               <label for="task" class="col-sm-12 control-label">Task</label>
@@ -82,8 +82,8 @@
             <!-- /.form-group -->
             <div class="form-group">
               <div class="col-sm-9 col-sm-offset-3">
-                <button type="submit" (click)="AddTask(addtaskFrom)" [disabled]="addtaskFrom.invalid" class="btn btn-info">{{ updateFlag == false ? 'Add' : 'Update'}}</button>
-                <button type="reset" id="reset" class="btn btn-info ml-1">Reset</button>
+                <button type="submit" (click)="AddTask(addtaskFrom)" [disabled]="addtaskFrom.invalid" class="btn btn-danger">{{ updateFlag == false ? 'Add' : 'Update'}}</button>
+                <button type="button" (click)="reset(addtaskFrom)" id="reset" class="btn btn-danger ml-1">Reset</button>
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
     </div>
     <div class="col-lg-8 col-md-8 col-sm-12">
      <div class="card">
-        <div class="card-header bg-success text-white">Task Details</div>
+        <div class="card-header bg-info text-white">Task Details</div>
         <div class="card-body">
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -148,10 +148,10 @@
                   <div class="btn-toolbar" role="toolbar">
                     <div class="btn-group" role="group">
                       <!-- <input type="button" [disabled]="!task.EditFlag" (click)="Edit(task.TaskId)" class="btn btn-info" value="Edit Task"> -->
-                      <button type="button" (click)="Edit(task.TaskId,task.EditFlag)" class="btn btn-info">{{task.EditFlag == false ? 'View':'Edit' }}</button>
+                      <button type="button" (click)="Edit(task.TaskId,task.EditFlag)" class="btn btn-danger">{{task.EditFlag == false ? 'View':'Edit' }}</button>
                     </div>
                     <div class="btn-group ml-2" role="group">
-                      <input type="button" *ngIf="task.EditFlag" (click)="UpdateEditFlag(task.TaskId)" class="btn btn-info" value="End Task">
+                      <input type="button" *ngIf="task.EditFlag" (click)="UpdateEditFlag(task.TaskId)" class="btn btn-danger" value="End Task">
                     </div>
                   </div>
                 </td>
