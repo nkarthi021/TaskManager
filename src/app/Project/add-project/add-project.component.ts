@@ -67,7 +67,8 @@ export class AddProjectComponent implements OnInit {
   }
 
   AddProject(addProjectForm: NgForm) {
-    if (this.UpdateFlag == false) {
+    if(this.DateValidation()) {
+    if (!this.UpdateFlag) {
       this._sharedService.AddProject(this.project).subscribe((value) => {
         this.Status = value;
         if(this.Status == "Success"){
@@ -99,6 +100,7 @@ export class AddProjectComponent implements OnInit {
         this.UpdateFlag = false;
       });
     }
+    }
   }
 
   Edit(ProjectId: number) {
@@ -121,7 +123,9 @@ export class AddProjectComponent implements OnInit {
       console.log(this.Status);
       if(this.Status == "Success"){
         this._success.next("The user has been deleted successfully");
-        console.log(this.successMessage);
+        this.project = { Project_Id: 0, Name: "", Priority: 1, Start_Date: "", End_Date: "", Manager_Id: 0 };
+        this.UpdateFlag=false;
+        this.setDateFlag=false;
       }
       else
       {
@@ -145,14 +149,24 @@ export class AddProjectComponent implements OnInit {
      if(!this.setDateFlag){ this.project.Start_Date=null; this.project.End_Date=null;}
     else {
       if(!this.UpdateFlag) {
-      let today = new Date()
-      let tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate()+1);
-      this.project.Start_Date =  formatDate(today, 'MM/dd/yyyy', 'en-US');
-      this.project.End_Date =  formatDate(tomorrow, 'MM/dd/yyyy', 'en-US');
+      let today = new Date();
+      // this.project.Start_Date =  formatDate(today, 'MM/dd/yyyy', 'en-US');
+      // this.project.End_Date =  formatDate(tomorrow, 'MM/dd/yyyy', 'en-US');
+      this.project.Start_Date = today.getFullYear()+ '-' + (today.getMonth()+1) + '-' +today.getDate();  
+      this.project.End_Date = today.getFullYear()+ '-' + (today.getMonth()+1) + '-' +(today.getDate()+1);
       console.log(this.project.Start_Date);
     }
     }
+  }
+
+  DateValidation() :boolean {
+    if(new Date(this.project.End_Date) < new Date(this.project.Start_Date))
+      {
+      this._error.next("End Date should not less than Start Date");
+        return false;
+      }
+      else return true;
+      
   }
 
    reset(form:NgForm){

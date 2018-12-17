@@ -100,11 +100,13 @@ export class AddUserComponent implements OnInit {
        this._error.next("An error occured. Please contact admin team");
       }
       else {
+        this.user = { User_Id:0, First_Name:"", Last_Name:"", Manager_Flag :false };
+        this.UpdateFlag=false;
         this._success.next("The user has been deleted successfully");
       }
       console.log(this.status);
-       this.GetUserDetails();
-        this._ModalService.dismissAll();})
+      this.GetUserDetails();
+      this._ModalService.dismissAll();})
   }
 
   reset(form:NgForm){

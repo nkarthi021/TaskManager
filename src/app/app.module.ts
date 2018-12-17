@@ -19,11 +19,11 @@ import { ProjectFilterPipe } from './Filter/project-filter.pipe'
 import { UserFilterPipe } from './Filter/user-filter.pipe';
 
 const AppRoute : Routes = [
-  {path:'task', component:AddTaskComponent },
+  {path:'Task', component:AddTaskComponent },
   {path:'updatetask/:TaskId', component:UpdateTaskComponent},
   {path:'viewtask', component:ViewTaskComponent},
-  {path:'user', component:AddUserComponent},
-  {path:'project', component:AddProjectComponent},
+  {path:'User', component:AddUserComponent},
+  {path:'Project', component:AddProjectComponent},
   {path:'', component:AddTaskComponent}
 ]
 
