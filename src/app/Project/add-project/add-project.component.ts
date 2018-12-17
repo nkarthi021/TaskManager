@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig  } from 'ngx-bootstrap/datepicker';
 import { NgbModal }  from '@ng-bootstrap/ng-bootstrap';
-import { formatDate, DatePipe } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 
@@ -18,7 +18,7 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
   providers: [SharedService]
 })
 export class AddProjectComponent implements OnInit {
-  project: Project = { Project_Id: 0, Name: "", Priority: 0, Start_Date: "", End_Date: "", Manager_Id: 0 };
+  project: Project = { Project_Id: 0, Name: "", Priority: 1, Start_Date: "", End_Date: "", Manager_Id: 0 };
   projectFilter:ProjectFilter = { Project:null, Manager:null, PriorityFrom:null, PriorityTo:null, StartDate:null, EndDate:null };
   startdatePickerConfig : Partial<BsDatepickerConfig>;
   enddatePickerConfig : Partial<BsDatepickerConfig>;
@@ -39,8 +39,8 @@ export class AddProjectComponent implements OnInit {
   constructor(private _sharedService: SharedService, private _modalService:NgbModal) {
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate()+1);
-    this.startdatePickerConfig = Object.assign({}, { showWeekNumbers:false, minDate: new Date() });
-     this.enddatePickerConfig = Object.assign({}, {  showWeekNumbers:false, minDate: tomorrow  });
+    this.startdatePickerConfig = Object.assign({}, { showWeekNumbers:false,  });
+     this.enddatePickerConfig = Object.assign({}, {  showWeekNumbers:false  });
    }
 
   ngOnInit() {
@@ -135,23 +135,29 @@ export class AddProjectComponent implements OnInit {
     });
   }
 
+  onStartDateChange(event:any){
+    this.enddatePickerConfig = Object.assign({}, {  showWeekNumbers:false, min: new Date(this.project.Start_Date)  });
+  }
+
   onSetDateChange(event:any){
     console.log('check event');
     this.setDateFlag = !this.setDateFlag;
-    if(!this.setDateFlag){this.project.Start_Date=null; this.project.End_Date=null;}
+     if(!this.setDateFlag){ this.project.Start_Date=null; this.project.End_Date=null;}
     else {
-      let today = new Date();
+      if(!this.UpdateFlag) {
+      let today = new Date()
       let tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate()+1);
-      this.project.Start_Date =  formatDate(today, 'dd/MM/yyyy', 'en-US');
-      this.project.End_Date =  formatDate(tomorrow, 'dd/MM/yyyy', 'en-US');
+      this.project.Start_Date =  formatDate(today, 'MM/dd/yyyy', 'en-US');
+      this.project.End_Date =  formatDate(tomorrow, 'MM/dd/yyyy', 'en-US');
       console.log(this.project.Start_Date);
+    }
     }
   }
 
    reset(form:NgForm){
      form.reset();
-    this.project = { Project_Id: 0, Name: "", Priority: 0, Start_Date: "", End_Date: "", Manager_Id: 0 };
+    this.project = { Project_Id: 0, Name: "", Priority:1, Start_Date: "", End_Date: "", Manager_Id: 0 };
     this.setDateFlag=false;
     this.UpdateFlag = false;
   }

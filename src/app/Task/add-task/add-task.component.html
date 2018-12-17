@@ -62,7 +62,7 @@
             <div class="form-group" [class.d-none]="hasParentTaskFlag">
               <label for="startdate" class="col-sm-12 control-label">Start Date</label>
               <div class="col-sm-9">
-                <input type="text" [required]="!hasParentTaskFlag" readonly [(ngModel)]="task.Start_Date" [(bsValue)]="task.Start_Date" value="{{task.Start_Date | date:'dd/MM/yyyy'}}"
+                <input type="text" [required]="!hasParentTaskFlag" [(ngModel)]="task.Start_Date" [(bsValue)]="task.Start_Date" value="{{task.Start_Date | date:'dd/MM/yyyy'}}"
                   #startdatecontrol="ngModel" name="startdate" bsDatepicker [class.is-invalid]="startdatecontrol.invalid && startdatecontrol.touched"
                   [class.is-valid]="startdatecontrol.valid" placement="right" class="form-control">
                 <span class="invalid-tooltip" *ngIf="startdatecontrol.invalid && startdatecontrol.touched">Start Date is required</span>
@@ -71,7 +71,7 @@
             <div class="form-group" [class.d-none]="hasParentTaskFlag">
               <label for="enddate" class="col-sm-12 control-label">End Date</label>
               <div class="col-sm-9">
-                <input type="text" [required]="!hasParentTaskFlag" readonly [(ngModel)]="task.End_Date" [(bsValue)]="task.End_Date" value="{{task.End_Date | date:'dd/MM/yyyy'}}"
+                <input type="text" [required]="!hasParentTaskFlag" [(ngModel)]="task.End_Date" [(bsValue)]="task.End_Date" value="{{task.End_Date | date:'dd/MM/yyyy'}}"
                   #enddatecontrol="ngModel" name="enddate" bsDatepicker [class.is-invalid]="enddatecontrol.invalid && enddatecontrol.touched"
                   [class.is-valid]="enddatecontrol.valid" placement="right" class="form-control">
                 <span class="invalid-tooltip" *ngIf="enddatecontrol.invalid && enddatecontrol.touched">End Date is required</span>
@@ -127,7 +127,7 @@
           </div>
           <hr>
           <table class="table table-bordered table-striped" [mfData]="taskDetails" #mf="mfDataTable" [mfRowsOnPage]="10">
-            <thead class="thead-dark">
+            <thead class="bg-info text-white">
               <tr>
                 <th scope="col"><mfDefaultSorter by="Task">Task</mfDefaultSorter></th>
                 <th scope="col"><mfDefaultSorter by="ParentTask">Parent Task</mfDefaultSorter></th>
